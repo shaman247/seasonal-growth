@@ -1,0 +1,18 @@
+{
+  "$schema": "https://rcade.dev/manifest.schema.json",
+  "name": "seasonalgrowth",
+  "display_name": "Seasonal Growth",
+  "description": "TBD Game Jam game (1/14)",
+  "visibility": "public",
+  "authors": [
+    {
+      "display_name": "Isha B"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "@rcade/input-classic",
+      "version": "1.0.0"
+    }
+  ]
+}

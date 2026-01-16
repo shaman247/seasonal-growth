@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Seasonal Growth - Browser Version</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            html, body {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+            body {
+                background: #0a0510;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-family: sans-serif;
+                color: #fff;
+            }
+            #sketch {
+                image-rendering: pixelated;
+                image-rendering: crisp-edges;
+            }
+            #sketch canvas {
+                display: block;
+                image-rendering: pixelated;
+                image-rendering: crisp-edges;
+            }
+        </style>
+    </head>
+    <body>
+        <main id="sketch"></main>
+
+        <!-- Keyboard input shim that mimics @rcade/plugin-input-classic API -->
+        <script type="module">
+            // Create keyboard state objects that mimic RCade input API
+            const keyState = {
+                up: false,
+                down: false,
+                left: false,
+                right: false,
+                a: false,
+                b: false,
+                start: false
+            };
+
+            // RCade API compatible objects
+            window.PLAYER_1 = {
+                DPAD: {
+                    get up() { return keyState.up; },
+                    get down() { return keyState.down; },
+                    get left() { return keyState.left; },
+                    get right() { return keyState.right; }
+                },
+                get A() { return keyState.a; },
+                get B() { return keyState.b; }
+            };
+
+            window.SYSTEM = {
+                get ONE_PLAYER() {
+                    const pressed = keyState.start;
+                    // Auto-reset start button after reading (like arcade button)
+                    if (pressed) {
+                        keyState.start = false;
+                    }
+                    return pressed;
+                }
+            };
+
+            // Keyboard event handlers
+            document.addEventListener('keydown', (e) => {
+                switch(e.code) {
+                    case 'ArrowUp':
+                    case 'KeyW':
+                        keyState.up = true;
+                        e.preventDefault();
+                        break;
+                    case 'ArrowDown':
+                    case 'KeyS':
+                        keyState.down = true;
+                        e.preventDefault();
+                        break;
+                    case 'ArrowLeft':
+                    case 'KeyA':
+                        keyState.left = true;
+                        e.preventDefault();
+                        break;
+                    case 'ArrowRight':
+                    case 'KeyD':
+                        keyState.right = true;
+                        e.preventDefault();
+                        break;
+                    case 'KeyZ':
+                    case 'Space':
+                        keyState.a = true;
+                        e.preventDefault();
+                        break;
+                    case 'KeyX':
+                        keyState.b = true;
+                        e.preventDefault();
+                        break;
+                    case 'Enter':
+                    case 'Digit1':
+                        keyState.start = true;
+                        e.preventDefault();
+                        break;
+                }
+            });
+
+            document.addEventListener('keyup', (e) => {
+                switch(e.code) {
+                    case 'ArrowUp':
+                    case 'KeyW':
+                        keyState.up = false;
+                        break;
+                    case 'ArrowDown':
+                    case 'KeyS':
+                        keyState.down = false;
+                        break;
+                    case 'ArrowLeft':
+                    case 'KeyA':
+                        keyState.left = false;
+                        break;
+                    case 'ArrowRight':
+                    case 'KeyD':
+                        keyState.right = false;
+                        break;
+                    case 'KeyZ':
+                    case 'Space':
+                        keyState.a = false;
+                        break;
+                    case 'KeyX':
+                        keyState.b = false;
+                        break;
+                }
+            });
+        </script>
+
+        <!-- Load modified game sketch that uses window globals instead of imports -->
+        <script type="module" src="./src/game-browser.js"></script>
+
+        <!-- Scale canvas to fit window -->
+        <script>
+            const GAME_WIDTH = 336;
+            const GAME_HEIGHT = 262;
+            const ASPECT_RATIO = GAME_WIDTH / GAME_HEIGHT;
+
+            function scaleCanvas() {
+                const canvas = document.querySelector('#sketch canvas');
+                if (!canvas) return;
+
+                const windowWidth = window.innerWidth;
+                const windowHeight = window.innerHeight;
+                const windowAspect = windowWidth / windowHeight;
+
+                let scaledWidth, scaledHeight;
+
+                if (windowAspect > ASPECT_RATIO) {
+                    // Window is wider than game - fit to height
+                    scaledHeight = windowHeight;
+                    scaledWidth = scaledHeight * ASPECT_RATIO;
+                } else {
+                    // Window is taller than game - fit to width
+                    scaledWidth = windowWidth;
+                    scaledHeight = scaledWidth / ASPECT_RATIO;
+                }
+
+                canvas.style.width = scaledWidth + 'px';
+                canvas.style.height = scaledHeight + 'px';
+            }
+
+            // Scale on load and resize
+            window.addEventListener('resize', scaleCanvas);
+
+            // Wait for canvas to be created, then scale
+            const observer = new MutationObserver((mutations, obs) => {
+                const canvas = document.querySelector('#sketch canvas');
+                if (canvas) {
+                    scaleCanvas();
+                    obs.disconnect();
+                }
+            });
+            observer.observe(document.getElementById('sketch'), { childList: true });
+        </script>
+    </body>
+</html>

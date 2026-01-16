@@ -1,0 +1,1257 @@
+{
+  "objects": {
+    "ant": {
+      "emoji": "🐜",
+      "name": "Ant",
+      "minSize": 3,
+      "maxSize": 6,
+      "spawnPattern": "scattered"
+    },
+    "bee": {
+      "emoji": "🐝",
+      "name": "Bee",
+      "minSize": 4,
+      "maxSize": 8,
+      "spawnPattern": "scattered"
+    },
+    "clover": {
+      "emoji": "🍀",
+      "name": "Clover",
+      "minSize": 5,
+      "maxSize": 10,
+      "spawnPattern": "clustered"
+    },
+    "blossom": {
+      "emoji": "🌸",
+      "name": "Cherry Blossom",
+      "minSize": 6,
+      "maxSize": 12,
+      "spawnPattern": "clustered"
+    },
+    "tulip": {
+      "emoji": "🌷",
+      "name": "Tulip",
+      "minSize": 8,
+      "maxSize": 16,
+      "spawnPattern": "clustered"
+    },
+    "butterfly": {
+      "emoji": "🦋",
+      "name": "Butterfly",
+      "minSize": 8,
+      "maxSize": 14,
+      "spawnPattern": "scattered"
+    },
+    "daisy": {
+      "emoji": "🌼",
+      "name": "Daisy",
+      "minSize": 8,
+      "maxSize": 20,
+      "spawnPattern": "clustered"
+    },
+    "bird": {
+      "emoji": "🐦",
+      "name": "Bird",
+      "minSize": 15,
+      "maxSize": 28,
+      "spawnPattern": "scattered"
+    },
+    "sunflower": {
+      "emoji": "🌻",
+      "name": "Sunflower",
+      "minSize": 25,
+      "maxSize": 55,
+      "spawnPattern": "grid"
+    },
+    "rabbit": {
+      "emoji": "🐰",
+      "name": "Rabbit",
+      "minSize": 20,
+      "maxSize": 40,
+      "spawnPattern": "scattered"
+    },
+    "sheep": {
+      "emoji": "🐑",
+      "name": "Sheep",
+      "minSize": 40,
+      "maxSize": 70,
+      "spawnPattern": "scattered"
+    },
+    "horse": {
+      "emoji": "🐎",
+      "name": "Horse",
+      "minSize": 80,
+      "maxSize": 140,
+      "spawnPattern": "scattered"
+    },
+    "ladybug": {
+      "emoji": "🐞",
+      "name": "Ladybug",
+      "minSize": 4,
+      "maxSize": 8,
+      "spawnPattern": "scattered"
+    },
+    "cricket": {
+      "emoji": "🦗",
+      "name": "Cricket",
+      "minSize": 5,
+      "maxSize": 10,
+      "spawnPattern": "scattered"
+    },
+    "hibiscus": {
+      "emoji": "🌺",
+      "name": "Hibiscus",
+      "minSize": 15,
+      "maxSize": 30,
+      "spawnPattern": "clustered"
+    },
+    "soccerBall": {
+      "emoji": "⚽",
+      "name": "Soccer Ball",
+      "minSize": 35,
+      "maxSize": 60,
+      "spawnPattern": "scattered"
+    },
+    "giraffe": {
+      "emoji": "🦒",
+      "name": "Giraffe",
+      "minSize": 100,
+      "maxSize": 180,
+      "spawnPattern": "scattered"
+    },
+    "fallenLeaf": {
+      "emoji": "🍂",
+      "name": "Fallen Leaf",
+      "minSize": 6,
+      "maxSize": 12,
+      "spawnPattern": "scattered"
+    },
+    "mapleLeaf": {
+      "emoji": "🍁",
+      "name": "Maple Leaf",
+      "minSize": 8,
+      "maxSize": 16,
+      "spawnPattern": "scattered"
+    },
+    "wheat": {
+      "emoji": "🌾",
+      "name": "Wheat",
+      "minSize": 20,
+      "maxSize": 40,
+      "spawnPattern": "grid"
+    },
+    "fox": {
+      "emoji": "🦊",
+      "name": "Fox",
+      "minSize": 40,
+      "maxSize": 65,
+      "spawnPattern": "scattered"
+    },
+    "pumpkin": {
+      "emoji": "🎃",
+      "name": "Pumpkin",
+      "minSize": 40,
+      "maxSize": 100,
+      "spawnPattern": "grid"
+    },
+    "bison": {
+      "emoji": "🦬",
+      "name": "Bison",
+      "minSize": 90,
+      "maxSize": 150,
+      "spawnPattern": "scattered"
+    },
+    "snowflake": {
+      "emoji": "❄️",
+      "name": "Snowflake",
+      "minSize": 6,
+      "maxSize": 16,
+      "spawnPattern": "scattered"
+    },
+    "snowman": {
+      "emoji": "⛄",
+      "name": "Snowman",
+      "minSize": 55,
+      "maxSize": 120,
+      "spawnPattern": "scattered"
+    },
+    "wolf": {
+      "emoji": "🐺",
+      "name": "Wolf",
+      "minSize": 45,
+      "maxSize": 75,
+      "spawnPattern": "scattered"
+    },
+    "christmasTree": {
+      "emoji": "🎄",
+      "name": "Christmas Tree",
+      "minSize": 70,
+      "maxSize": 160,
+      "spawnPattern": "scattered"
+    },
+    "deer": {
+      "emoji": "🦌",
+      "name": "Deer",
+      "minSize": 50,
+      "maxSize": 85,
+      "spawnPattern": "scattered"
+    },
+    "caterpillar": {
+      "emoji": "🐛",
+      "name": "Caterpillar",
+      "minSize": 3,
+      "maxSize": 8,
+      "spawnPattern": "scattered"
+    },
+    "beetle": {
+      "emoji": "🪲",
+      "name": "Beetle",
+      "minSize": 5,
+      "maxSize": 10,
+      "spawnPattern": "scattered"
+    },
+    "mushroom": {
+      "emoji": "🍄",
+      "name": "Mushroom",
+      "minSize": 10,
+      "maxSize": 30,
+      "spawnPattern": "clustered"
+    },
+    "squirrel": {
+      "emoji": "🐿️",
+      "name": "Squirrel",
+      "minSize": 12,
+      "maxSize": 26,
+      "spawnPattern": "scattered"
+    },
+    "nest": {
+      "emoji": "🪺",
+      "name": "Bird Nest",
+      "minSize": 8,
+      "maxSize": 14,
+      "spawnPattern": "scattered"
+    },
+    "log": {
+      "emoji": "🪵",
+      "name": "Log",
+      "minSize": 20,
+      "maxSize": 35,
+      "spawnPattern": "scattered"
+    },
+    "raccoon": {
+      "emoji": "🦝",
+      "name": "Raccoon",
+      "minSize": 35,
+      "maxSize": 55,
+      "spawnPattern": "scattered"
+    },
+    "tent": {
+      "emoji": "⛺",
+      "name": "Tent",
+      "minSize": 55,
+      "maxSize": 90,
+      "spawnPattern": "scattered"
+    },
+    "pineTree": {
+      "emoji": "🌲",
+      "name": "Pine Tree",
+      "minSize": 120,
+      "maxSize": 220,
+      "spawnPattern": "scattered"
+    },
+    "deciduousTree": {
+      "emoji": "🌳",
+      "name": "Oak Tree",
+      "minSize": 100,
+      "maxSize": 200,
+      "spawnPattern": "grid"
+    },
+    "blueberries": {
+      "emoji": "🫐",
+      "name": "Blueberries",
+      "minSize": 6,
+      "maxSize": 12,
+      "spawnPattern": "clustered"
+    },
+    "lizard": {
+      "emoji": "🦎",
+      "name": "Lizard",
+      "minSize": 8,
+      "maxSize": 16,
+      "spawnPattern": "scattered"
+    },
+    "snake": {
+      "emoji": "🐍",
+      "name": "Snake",
+      "minSize": 15,
+      "maxSize": 35,
+      "spawnPattern": "scattered"
+    },
+    "bear": {
+      "emoji": "🐻",
+      "name": "Bear",
+      "minSize": 50,
+      "maxSize": 80,
+      "spawnPattern": "scattered"
+    },
+    "campground": {
+      "emoji": "🏕️",
+      "name": "Campground",
+      "minSize": 90,
+      "maxSize": 150,
+      "spawnPattern": "scattered"
+    },
+    "chestnut": {
+      "emoji": "🌰",
+      "name": "Chestnut",
+      "minSize": 6,
+      "maxSize": 12,
+      "spawnPattern": "scattered"
+    },
+    "hedgehog": {
+      "emoji": "🦔",
+      "name": "Hedgehog",
+      "minSize": 16,
+      "maxSize": 28,
+      "spawnPattern": "scattered"
+    },
+    "badger": {
+      "emoji": "🦡",
+      "name": "Badger",
+      "minSize": 35,
+      "maxSize": 55,
+      "spawnPattern": "scattered"
+    },
+    "waterDrop": {
+      "emoji": "💧",
+      "name": "Water Drop",
+      "minSize": 3,
+      "maxSize": 8,
+      "spawnPattern": "scattered"
+    },
+    "mosquito": {
+      "emoji": "🦟",
+      "name": "Mosquito",
+      "minSize": 3,
+      "maxSize": 5,
+      "spawnPattern": "scattered"
+    },
+    "seedling": {
+      "emoji": "🌱",
+      "name": "Seedling",
+      "minSize": 5,
+      "maxSize": 10,
+      "spawnPattern": "grid"
+    },
+    "frog": {
+      "emoji": "🐸",
+      "name": "Frog",
+      "minSize": 12,
+      "maxSize": 28,
+      "spawnPattern": "scattered"
+    },
+    "turtle": {
+      "emoji": "🐢",
+      "name": "Turtle",
+      "minSize": 20,
+      "maxSize": 55,
+      "spawnPattern": "scattered"
+    },
+    "duck": {
+      "emoji": "🦆",
+      "name": "Duck",
+      "minSize": 25,
+      "maxSize": 50,
+      "spawnPattern": "scattered"
+    },
+    "swan": {
+      "emoji": "🦢",
+      "name": "Swan",
+      "minSize": 40,
+      "maxSize": 70,
+      "spawnPattern": "scattered"
+    },
+    "beaver": {
+      "emoji": "🦫",
+      "name": "Beaver",
+      "minSize": 40,
+      "maxSize": 65,
+      "spawnPattern": "scattered"
+    },
+    "canoe": {
+      "emoji": "🛶",
+      "name": "Canoe",
+      "minSize": 70,
+      "maxSize": 120,
+      "spawnPattern": "scattered"
+    },
+    "fish": {
+      "emoji": "🐟",
+      "name": "Fish",
+      "minSize": 10,
+      "maxSize": 30,
+      "spawnPattern": "scattered"
+    },
+    "lotus": {
+      "emoji": "🪷",
+      "name": "Lotus",
+      "minSize": 15,
+      "maxSize": 30,
+      "spawnPattern": "clustered"
+    },
+    "flamingo": {
+      "emoji": "🦩",
+      "name": "Flamingo",
+      "minSize": 45,
+      "maxSize": 80,
+      "spawnPattern": "scattered"
+    },
+    "crocodile": {
+      "emoji": "🐊",
+      "name": "Crocodile",
+      "minSize": 60,
+      "maxSize": 100,
+      "spawnPattern": "scattered"
+    },
+    "hippo": {
+      "emoji": "🦛",
+      "name": "Hippopotamus",
+      "minSize": 90,
+      "maxSize": 150,
+      "spawnPattern": "scattered"
+    },
+    "ice": {
+      "emoji": "🧊",
+      "name": "Ice Block",
+      "minSize": 20,
+      "maxSize": 50,
+      "spawnPattern": "scattered"
+    },
+    "shell": {
+      "emoji": "🐚",
+      "name": "Seashell",
+      "minSize": 6,
+      "maxSize": 14,
+      "spawnPattern": "scattered"
+    },
+    "crab": {
+      "emoji": "🦀",
+      "name": "Crab",
+      "minSize": 12,
+      "maxSize": 40,
+      "spawnPattern": "scattered"
+    },
+    "bucket": {
+      "emoji": "🪣",
+      "name": "Beach Bucket",
+      "minSize": 30,
+      "maxSize": 55,
+      "spawnPattern": "scattered"
+    },
+    "hut": {
+      "emoji": "🛖",
+      "name": "Beach Hut",
+      "minSize": 70,
+      "maxSize": 120,
+      "spawnPattern": "scattered"
+    },
+    "palmTree": {
+      "emoji": "🌴",
+      "name": "Palm Tree",
+      "minSize": 60,
+      "maxSize": 100,
+      "spawnPattern": "scattered"
+    },
+    "salt": {
+      "emoji": "🧂",
+      "name": "Salt Crystal",
+      "minSize": 5,
+      "maxSize": 10,
+      "spawnPattern": "scattered"
+    },
+    "iceCream": {
+      "emoji": "🍦",
+      "name": "Ice Cream",
+      "minSize": 10,
+      "maxSize": 20,
+      "spawnPattern": "scattered"
+    },
+    "volleyball": {
+      "emoji": "🏐",
+      "name": "Beach Ball",
+      "minSize": 30,
+      "maxSize": 55,
+      "spawnPattern": "scattered"
+    },
+    "suitcase": {
+      "emoji": "🧳",
+      "name": "Suitcase",
+      "minSize": 35,
+      "maxSize": 60,
+      "spawnPattern": "scattered"
+    },
+    "guitar": {
+      "emoji": "🎸",
+      "name": "Guitar",
+      "minSize": 45,
+      "maxSize": 70,
+      "spawnPattern": "scattered"
+    },
+    "beachUmbrella": {
+      "emoji": "⛱️",
+      "name": "Beach Umbrella",
+      "minSize": 60,
+      "maxSize": 120,
+      "spawnPattern": "scattered"
+    },
+    "circus": {
+      "emoji": "🎪",
+      "name": "Beach Tent",
+      "minSize": 60,
+      "maxSize": 100,
+      "spawnPattern": "scattered"
+    },
+    "camel": {
+      "emoji": "🐪",
+      "name": "Camel",
+      "minSize": 80,
+      "maxSize": 140,
+      "spawnPattern": "scattered"
+    },
+    "seal": {
+      "emoji": "🦭",
+      "name": "Seal",
+      "minSize": 50,
+      "maxSize": 90,
+      "spawnPattern": "scattered"
+    },
+    "penguin": {
+      "emoji": "🐧",
+      "name": "Penguin",
+      "minSize": 40,
+      "maxSize": 70,
+      "spawnPattern": "clustered"
+    },
+    "polarBear": {
+      "emoji": "🐻‍❄️",
+      "name": "Polar Bear",
+      "minSize": 90,
+      "maxSize": 150,
+      "spawnPattern": "scattered"
+    },
+    "hatching": {
+      "emoji": "🐣",
+      "name": "Hatching Chick",
+      "minSize": 6,
+      "maxSize": 12,
+      "spawnPattern": "scattered"
+    },
+    "egg": {
+      "emoji": "🥚",
+      "name": "Egg",
+      "minSize": 6,
+      "maxSize": 12,
+      "spawnPattern": "grid"
+    },
+    "carrot": {
+      "emoji": "🥕",
+      "name": "Carrot",
+      "minSize": 8,
+      "maxSize": 16,
+      "spawnPattern": "grid"
+    },
+    "lettuce": {
+      "emoji": "🥬",
+      "name": "Lettuce",
+      "minSize": 12,
+      "maxSize": 24,
+      "spawnPattern": "grid"
+    },
+    "chick": {
+      "emoji": "🐤",
+      "name": "Baby Chick",
+      "minSize": 10,
+      "maxSize": 18,
+      "spawnPattern": "scattered"
+    },
+    "box": {
+      "emoji": "📦",
+      "name": "Cardboard Box",
+      "minSize": 20,
+      "maxSize": 35,
+      "spawnPattern": "scattered"
+    },
+    "basket": {
+      "emoji": "🧺",
+      "name": "Basket",
+      "minSize": 18,
+      "maxSize": 32,
+      "spawnPattern": "scattered"
+    },
+    "pig": {
+      "emoji": "🐖",
+      "name": "Pig",
+      "minSize": 40,
+      "maxSize": 70,
+      "spawnPattern": "scattered"
+    },
+    "cow": {
+      "emoji": "🐄",
+      "name": "Cow",
+      "minSize": 70,
+      "maxSize": 120,
+      "spawnPattern": "scattered"
+    },
+    "shed": {
+      "emoji": "🏚️",
+      "name": "Shed",
+      "minSize": 80,
+      "maxSize": 130,
+      "spawnPattern": "grid"
+    },
+    "house": {
+      "emoji": "🏠",
+      "name": "House",
+      "minSize": 140,
+      "maxSize": 280,
+      "spawnPattern": "grid"
+    },
+    "beans": {
+      "emoji": "🫘",
+      "name": "Beans",
+      "minSize": 4,
+      "maxSize": 8,
+      "spawnPattern": "grid"
+    },
+    "tomato": {
+      "emoji": "🍅",
+      "name": "Tomato",
+      "minSize": 8,
+      "maxSize": 16,
+      "spawnPattern": "grid"
+    },
+    "cucumber": {
+      "emoji": "🥒",
+      "name": "Cucumber",
+      "minSize": 10,
+      "maxSize": 22,
+      "spawnPattern": "grid"
+    },
+    "strawberry": {
+      "emoji": "🍓",
+      "name": "Strawberry",
+      "minSize": 8,
+      "maxSize": 16,
+      "spawnPattern": "grid"
+    },
+    "chicken": {
+      "emoji": "🐔",
+      "name": "Chicken",
+      "minSize": 14,
+      "maxSize": 28,
+      "spawnPattern": "scattered"
+    },
+    "corn": {
+      "emoji": "🌽",
+      "name": "Corn",
+      "minSize": 15,
+      "maxSize": 30,
+      "spawnPattern": "grid"
+    },
+    "watermelon": {
+      "emoji": "🍉",
+      "name": "Watermelon",
+      "minSize": 35,
+      "maxSize": 70,
+      "spawnPattern": "grid"
+    },
+    "tractor": {
+      "emoji": "🚜",
+      "name": "Tractor",
+      "minSize": 90,
+      "maxSize": 150,
+      "spawnPattern": "scattered"
+    },
+    "apple": {
+      "emoji": "🍎",
+      "name": "Apple",
+      "minSize": 8,
+      "maxSize": 22,
+      "spawnPattern": "clustered"
+    },
+    "onion": {
+      "emoji": "🧅",
+      "name": "Onion",
+      "minSize": 10,
+      "maxSize": 20,
+      "spawnPattern": "grid"
+    },
+    "potato": {
+      "emoji": "🥔",
+      "name": "Potato",
+      "minSize": 10,
+      "maxSize": 22,
+      "spawnPattern": "grid"
+    },
+    "turkey": {
+      "emoji": "🦃",
+      "name": "Turkey",
+      "minSize": 35,
+      "maxSize": 60,
+      "spawnPattern": "scattered"
+    },
+    "hayBale": {
+      "emoji": "🌾",
+      "name": "Hay Bale",
+      "minSize": 70,
+      "maxSize": 110,
+      "spawnPattern": "grid"
+    },
+    "gift": {
+      "emoji": "🎁",
+      "name": "Gift Box",
+      "minSize": 15,
+      "maxSize": 35,
+      "spawnPattern": "scattered"
+    },
+    "hyacinth": {
+      "emoji": "🪻",
+      "name": "Hyacinth",
+      "minSize": 12,
+      "maxSize": 24,
+      "spawnPattern": "clustered"
+    },
+    "dog": {
+      "emoji": "🐕",
+      "name": "Dog",
+      "minSize": 35,
+      "maxSize": 60,
+      "spawnPattern": "scattered"
+    },
+    "cat": {
+      "emoji": "🐈",
+      "name": "Cat",
+      "minSize": 30,
+      "maxSize": 50,
+      "spawnPattern": "scattered"
+    },
+    "pottedPlant": {
+      "emoji": "🪴",
+      "name": "Potted Plant",
+      "minSize": 35,
+      "maxSize": 65,
+      "spawnPattern": "scattered"
+    },
+    "mailbox": {
+      "emoji": "📮",
+      "name": "Mailbox",
+      "minSize": 40,
+      "maxSize": 65,
+      "spawnPattern": "scattered"
+    },
+    "umbrella": {
+      "emoji": "☂️",
+      "name": "Umbrella",
+      "minSize": 40,
+      "maxSize": 70,
+      "spawnPattern": "scattered"
+    },
+    "bicycle": {
+      "emoji": "🚲",
+      "name": "Bicycle",
+      "minSize": 50,
+      "maxSize": 80,
+      "spawnPattern": "scattered"
+    },
+    "fountain": {
+      "emoji": "⛲",
+      "name": "Fountain",
+      "minSize": 90,
+      "maxSize": 150,
+      "spawnPattern": "scattered"
+    },
+    "shop": {
+      "emoji": "🏪",
+      "name": "Shop",
+      "minSize": 90,
+      "maxSize": 150,
+      "spawnPattern": "grid"
+    },
+    "rose": {
+      "emoji": "🌹",
+      "name": "Rose",
+      "minSize": 12,
+      "maxSize": 25,
+      "spawnPattern": "clustered"
+    },
+    "chair": {
+      "emoji": "🪑",
+      "name": "Chair",
+      "minSize": 40,
+      "maxSize": 70,
+      "spawnPattern": "scattered"
+    },
+    "trashCan": {
+      "emoji": "🗑️",
+      "name": "Trash Can",
+      "minSize": 45,
+      "maxSize": 75,
+      "spawnPattern": "scattered"
+    },
+    "scooter": {
+      "emoji": "🛵",
+      "name": "Scooter",
+      "minSize": 50,
+      "maxSize": 80,
+      "spawnPattern": "scattered"
+    },
+    "basketball": {
+      "emoji": "🏀",
+      "name": "Basketball",
+      "minSize": 35,
+      "maxSize": 55,
+      "spawnPattern": "scattered"
+    },
+    "car": {
+      "emoji": "🚗",
+      "name": "Car",
+      "minSize": 60,
+      "maxSize": 100,
+      "spawnPattern": "scattered"
+    },
+    "van": {
+      "emoji": "🚐",
+      "name": "Van",
+      "minSize": 80,
+      "maxSize": 130,
+      "spawnPattern": "scattered"
+    },
+    "bus": {
+      "emoji": "🚌",
+      "name": "Bus",
+      "minSize": 100,
+      "maxSize": 160,
+      "spawnPattern": "scattered"
+    },
+    "ferrisWheel": {
+      "emoji": "🎡",
+      "name": "Ferris Wheel",
+      "minSize": 180,
+      "maxSize": 280,
+      "spawnPattern": "scattered"
+    },
+    "broom": {
+      "emoji": "🧹",
+      "name": "Broom",
+      "minSize": 35,
+      "maxSize": 60,
+      "spawnPattern": "scattered"
+    },
+    "nestingDoll": {
+      "emoji": "🪆",
+      "name": "Nesting Doll",
+      "minSize": 30,
+      "maxSize": 55,
+      "spawnPattern": "scattered"
+    },
+    "pear": {
+      "emoji": "🍐",
+      "name": "Pear",
+      "minSize": 8,
+      "maxSize": 22,
+      "spawnPattern": "clustered"
+    },
+    "peach": {
+      "emoji": "🍑",
+      "name": "Peach",
+      "minSize": 8,
+      "maxSize": 16,
+      "spawnPattern": "clustered"
+    },
+    "orange": {
+      "emoji": "🍊",
+      "name": "Orange",
+      "minSize": 10,
+      "maxSize": 22,
+      "spawnPattern": "clustered"
+    },
+    "lemon": {
+      "emoji": "🍋",
+      "name": "Lemon",
+      "minSize": 8,
+      "maxSize": 18,
+      "spawnPattern": "clustered"
+    },
+    "grapes": {
+      "emoji": "🍇",
+      "name": "Grapes",
+      "minSize": 12,
+      "maxSize": 28,
+      "spawnPattern": "clustered"
+    },
+    "goat": {
+      "emoji": "🐐",
+      "name": "Goat",
+      "minSize": 45,
+      "maxSize": 75,
+      "spawnPattern": "scattered"
+    },
+    "rock": {
+      "emoji": "🪨",
+      "name": "Rock",
+      "minSize": 30,
+      "maxSize": 200,
+      "spawnPattern": "scattered"
+    },
+    "cactus": {
+      "emoji": "🌵",
+      "name": "Cactus",
+      "minSize": 40,
+      "maxSize": 80,
+      "spawnPattern": "scattered"
+    },
+    "rhino": {
+      "emoji": "🦏",
+      "name": "Rhinoceros",
+      "minSize": 90,
+      "maxSize": 150,
+      "spawnPattern": "scattered"
+    },
+    "mammoth": {
+      "emoji": "🦣",
+      "name": "Mammoth",
+      "minSize": 100,
+      "maxSize": 160,
+      "spawnPattern": "scattered"
+    },
+    "snowMountain": {
+      "emoji": "🏔️",
+      "name": "Snow Mountain",
+      "minSize": 180,
+      "maxSize": 280,
+      "spawnPattern": "scattered"
+    },
+    "castle": {
+      "emoji": "🏰",
+      "name": "Castle",
+      "minSize": 280,
+      "maxSize": 380,
+      "spawnPattern": "scattered"
+    },
+    "shrimp": {
+      "emoji": "🦐",
+      "name": "Shrimp",
+      "minSize": 6,
+      "maxSize": 12,
+      "spawnPattern": "scattered"
+    },
+    "jellyfish": {
+      "emoji": "🪼",
+      "name": "Jellyfish",
+      "minSize": 15,
+      "maxSize": 35,
+      "spawnPattern": "scattered"
+    },
+    "squid": {
+      "emoji": "🦑",
+      "name": "Squid",
+      "minSize": 40,
+      "maxSize": 80,
+      "spawnPattern": "scattered"
+    },
+    "rowboat": {
+      "emoji": "🚣",
+      "name": "Rowboat",
+      "minSize": 80,
+      "maxSize": 130,
+      "spawnPattern": "scattered"
+    },
+    "sailboat": {
+      "emoji": "⛵",
+      "name": "Sailboat",
+      "minSize": 90,
+      "maxSize": 150,
+      "spawnPattern": "scattered"
+    },
+    "coral": {
+      "emoji": "🪸",
+      "name": "Coral",
+      "minSize": 8,
+      "maxSize": 14,
+      "spawnPattern": "clustered"
+    },
+    "lobster": {
+      "emoji": "🦞",
+      "name": "Lobster",
+      "minSize": 20,
+      "maxSize": 35,
+      "spawnPattern": "scattered"
+    },
+    "octopus": {
+      "emoji": "🐙",
+      "name": "Octopus",
+      "minSize": 50,
+      "maxSize": 100,
+      "spawnPattern": "scattered"
+    },
+    "shark": {
+      "emoji": "🦈",
+      "name": "Shark",
+      "minSize": 60,
+      "maxSize": 100,
+      "spawnPattern": "scattered"
+    },
+    "dolphin": {
+      "emoji": "🐬",
+      "name": "Dolphin",
+      "minSize": 55,
+      "maxSize": 95,
+      "spawnPattern": "scattered"
+    },
+    "speedboat": {
+      "emoji": "🚤",
+      "name": "Speedboat",
+      "minSize": 85,
+      "maxSize": 140,
+      "spawnPattern": "scattered"
+    },
+    "spoutingWhale": {
+      "emoji": "🐳",
+      "name": "Spouting Whale",
+      "minSize": 200,
+      "maxSize": 350,
+      "spawnPattern": "scattered"
+    },
+    "ship": {
+      "emoji": "🚢",
+      "name": "Ship",
+      "minSize": 280,
+      "maxSize": 380,
+      "spawnPattern": "scattered"
+    },
+    "whale": {
+      "emoji": "🐋",
+      "name": "Whale",
+      "minSize": 200,
+      "maxSize": 350,
+      "spawnPattern": "scattered"
+    },
+    "sun": {
+      "emoji": "☀️",
+      "name": "THE SUN",
+      "minSize": 380,
+      "maxSize": 380,
+      "spawnPattern": "scattered"
+    },
+    "moai": {
+      "emoji": "🗿",
+      "name": "Moai",
+      "minSize": 80,
+      "maxSize": 160,
+      "spawnPattern": "grid"
+    },
+    "surfer": {
+      "emoji": "🏄",
+      "name": "Surfer",
+      "minSize": 30,
+      "maxSize": 50,
+      "spawnPattern": "scattered"
+    },
+    "unicorn": {
+      "emoji": "🦄",
+      "name": "Unicorn",
+      "minSize": 60,
+      "maxSize": 100,
+      "spawnPattern": "scattered"
+    },
+    "rainbow": {
+      "emoji": "🌈",
+      "name": "Rainbow",
+      "minSize": 200,
+      "maxSize": 320,
+      "spawnPattern": "scattered"
+    },
+    "carousel": {
+      "emoji": "🎠",
+      "name": "Carousel",
+      "minSize": 120,
+      "maxSize": 200,
+      "spawnPattern": "scattered"
+    },
+    "hotAirBalloon": {
+      "emoji": "🎈",
+      "name": "Hot Air Balloon",
+      "minSize": 80,
+      "maxSize": 150,
+      "spawnPattern": "scattered"
+    },
+    "sloth": {
+      "emoji": "🦥",
+      "name": "Sloth",
+      "minSize": 25,
+      "maxSize": 45,
+      "spawnPattern": "scattered"
+    },
+    "parrot": {
+      "emoji": "🦜",
+      "name": "Parrot",
+      "minSize": 18,
+      "maxSize": 35,
+      "spawnPattern": "clustered"
+    },
+    "ufo": {
+      "emoji": "🛸",
+      "name": "UFO",
+      "minSize": 60,
+      "maxSize": 120,
+      "spawnPattern": "scattered"
+    },
+    "alien": {
+      "emoji": "👽",
+      "name": "Alien",
+      "minSize": 25,
+      "maxSize": 50,
+      "spawnPattern": "clustered"
+    },
+    "statueOfLiberty": {
+      "emoji": "🗽",
+      "name": "Statue of Liberty",
+      "minSize": 250,
+      "maxSize": 350,
+      "spawnPattern": "scattered"
+    },
+    "tokyoTower": {
+      "emoji": "🗼",
+      "name": "Tokyo Tower",
+      "minSize": 200,
+      "maxSize": 300,
+      "spawnPattern": "scattered"
+    },
+    "mermaid": {
+      "emoji": "🧜",
+      "name": "Mermaid",
+      "minSize": 40,
+      "maxSize": 70,
+      "spawnPattern": "scattered"
+    },
+    "sauropod": {
+      "emoji": "🦕",
+      "name": "Brontosaurus",
+      "minSize": 150,
+      "maxSize": 280,
+      "spawnPattern": "scattered"
+    },
+    "trex": {
+      "emoji": "🦖",
+      "name": "T-Rex",
+      "minSize": 120,
+      "maxSize": 220,
+      "spawnPattern": "scattered"
+    },
+    "desertIsland": {
+      "emoji": "🏝️",
+      "name": "Desert Island",
+      "minSize": 100,
+      "maxSize": 180,
+      "spawnPattern": "scattered"
+    },
+    "santa": {
+      "emoji": "🎅",
+      "name": "Santa Claus",
+      "minSize": 50,
+      "maxSize": 90,
+      "spawnPattern": "scattered"
+    },
+    "dragon": {
+      "emoji": "🐉",
+      "name": "Dragon",
+      "minSize": 150,
+      "maxSize": 280,
+      "spawnPattern": "scattered"
+    },
+    "phoenix": {
+      "emoji": "🐦‍🔥",
+      "name": "Phoenix",
+      "minSize": 80,
+      "maxSize": 150,
+      "spawnPattern": "scattered"
+    },
+    "robot": {
+      "emoji": "🤖",
+      "name": "Robot",
+      "minSize": 50,
+      "maxSize": 100,
+      "spawnPattern": "scattered"
+    },
+    "ghost": {
+      "emoji": "👻",
+      "name": "Ghost",
+      "minSize": 30,
+      "maxSize": 60,
+      "spawnPattern": "clustered"
+    },
+    "jackOLantern": {
+      "emoji": "🎃",
+      "name": "Jack-o-Lantern",
+      "minSize": 40,
+      "maxSize": 100,
+      "spawnPattern": "grid"
+    },
+    "diamond": {
+      "emoji": "💎",
+      "name": "Diamond",
+      "minSize": 15,
+      "maxSize": 35,
+      "spawnPattern": "scattered"
+    },
+    "crown": {
+      "emoji": "👑",
+      "name": "Crown",
+      "minSize": 20,
+      "maxSize": 40,
+      "spawnPattern": "scattered"
+    },
+    "comet": {
+      "emoji": "☄️",
+      "name": "Comet",
+      "minSize": 60,
+      "maxSize": 120,
+      "spawnPattern": "scattered"
+    },
+    "volcano": {
+      "emoji": "🌋",
+      "name": "Volcano",
+      "minSize": 200,
+      "maxSize": 320,
+      "spawnPattern": "scattered"
+    },
+    "tornado": {
+      "emoji": "🌪️",
+      "name": "Tornado",
+      "minSize": 100,
+      "maxSize": 200,
+      "spawnPattern": "scattered"
+    },
+    "clown": {
+      "emoji": "🤡",
+      "name": "Clown",
+      "minSize": 40,
+      "maxSize": 70,
+      "spawnPattern": "scattered"
+    },
+    "gnome": {
+      "emoji": "🧙",
+      "name": "Wizard",
+      "minSize": 35,
+      "maxSize": 60,
+      "spawnPattern": "scattered"
+    },
+    "yeti": {
+      "emoji": "🧌",
+      "name": "Yeti",
+      "minSize": 80,
+      "maxSize": 140,
+      "spawnPattern": "scattered"
+    }
+  }
+}

@@ -1,0 +1,1910 @@
+{
+  "biomes": {
+    "ocean": {
+      "id": "ocean",
+      "name": "Ocean",
+      "description": "Deep waters surrounding the island. Movement is slow here, but treasures await the brave.",
+      "location": "Surrounding Waters",
+      "colors": {
+        "spring": [
+          70,
+          120,
+          165
+        ],
+        "summer": [
+          45,
+          95,
+          140
+        ],
+        "fall": [
+          70,
+          100,
+          135
+        ],
+        "winter": [
+          80,
+          110,
+          140
+        ]
+      },
+      "objects": {
+        "spring": [
+          {
+            "id": "shell",
+            "weight": 2
+          },
+          {
+            "id": "shrimp",
+            "weight": 1.5,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "fish",
+            "weight": 2
+          },
+          {
+            "id": "jellyfish",
+            "weight": 1.2
+          },
+          {
+            "id": "squid",
+            "weight": 0.8
+          },
+          {
+            "id": "turtle",
+            "weight": 0.8
+          },
+          {
+            "id": "rowboat",
+            "weight": 0.3
+          },
+          {
+            "id": "sailboat",
+            "weight": 0.25
+          }
+        ],
+        "summer": [
+          {
+            "id": "shell",
+            "weight": 2
+          },
+          {
+            "id": "shrimp",
+            "weight": 1.5,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "coral",
+            "weight": 1.5
+          },
+          {
+            "id": "fish",
+            "weight": 2
+          },
+          {
+            "id": "jellyfish",
+            "weight": 1.2
+          },
+          {
+            "id": "crab",
+            "weight": 1.5
+          },
+          {
+            "id": "lobster",
+            "weight": 1
+          },
+          {
+            "id": "turtle",
+            "weight": 0.8
+          },
+          {
+            "id": "octopus",
+            "weight": 0.6
+          },
+          {
+            "id": "shark",
+            "weight": 0.4
+          },
+          {
+            "id": "dolphin",
+            "weight": 0.5
+          },
+          {
+            "id": "rowboat",
+            "weight": 0.3
+          },
+          {
+            "id": "sailboat",
+            "weight": 0.25
+          },
+          {
+            "id": "speedboat",
+            "weight": 0.2
+          },
+          {
+            "id": "spoutingWhale",
+            "weight": 0.15
+          },
+          {
+            "id": "ship",
+            "weight": 0.08
+          },
+          {
+            "id": "mermaid",
+            "weight": 0.04
+          },
+          {
+            "id": "desertIsland",
+            "weight": 0.03
+          },
+          {
+            "id": "sauropod",
+            "weight": 0.01
+          }
+        ],
+        "fall": [
+          {
+            "id": "shell",
+            "weight": 2
+          },
+          {
+            "id": "shrimp",
+            "weight": 1.5,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "fish",
+            "weight": 2
+          },
+          {
+            "id": "jellyfish",
+            "weight": 1
+          },
+          {
+            "id": "squid",
+            "weight": 0.8
+          },
+          {
+            "id": "turtle",
+            "weight": 0.6
+          },
+          {
+            "id": "rowboat",
+            "weight": 0.3
+          },
+          {
+            "id": "sailboat",
+            "weight": 0.2
+          }
+        ],
+        "winter": [
+          {
+            "id": "shell",
+            "weight": 2
+          },
+          {
+            "id": "ice",
+            "weight": 1.5
+          },
+          {
+            "id": "seal",
+            "weight": 0.6
+          },
+          {
+            "id": "penguin",
+            "weight": 0.7
+          },
+          {
+            "id": "whale",
+            "weight": 0.15
+          },
+          {
+            "id": "ship",
+            "weight": 0.05
+          }
+        ]
+      },
+            "objectDensity": 0.2,
+      "isOcean": true,
+      "terrainSpeed": "ocean"
+    },
+    "meadow": {
+      "id": "meadow",
+      "name": "Meadow",
+      "description": "Open grasslands filled with wildflowers and buzzing insects. A peaceful place to begin your journey.",
+      "location": "Center & North",
+      "colors": {
+        "spring": [
+          145,
+          215,
+          130
+        ],
+        "summer": [
+          175,
+          185,
+          95
+        ],
+        "fall": [
+          185,
+          165,
+          120
+        ],
+        "winter": [
+          225,
+          230,
+          235
+        ]
+      },
+      "objects": {
+        "spring": [
+          {
+            "id": "ant",
+            "weight": 2,
+            "maxPlayerSize": 40
+          },
+          {
+            "id": "bee",
+            "weight": 2,
+            "maxPlayerSize": 50
+          },
+          {
+            "id": "clover",
+            "weight": 2,
+            "maxPlayerSize": 60
+          },
+          {
+            "id": "blossom",
+            "weight": 3,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "tulip",
+            "weight": 2.5,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "butterfly",
+            "weight": 1.5,
+            "maxPlayerSize": 90
+          },
+          {
+            "id": "daisy",
+            "weight": 2
+          },
+          {
+            "id": "bird",
+            "weight": 1.2,
+            "maxPlayerSize": 180
+          },
+          {
+            "id": "sunflower",
+            "weight": 1
+          },
+          {
+            "id": "rabbit",
+            "weight": 0.8,
+            "maxPlayerSize": 250
+          },
+          {
+            "id": "sheep",
+            "weight": 0.5
+          },
+          {
+            "id": "horse",
+            "weight": 0.3
+          }
+        ],
+        "summer": [
+          {
+            "id": "ant",
+            "weight": 2,
+            "maxPlayerSize": 40
+          },
+          {
+            "id": "ladybug",
+            "weight": 2,
+            "maxPlayerSize": 50
+          },
+          {
+            "id": "cricket",
+            "weight": 2,
+            "maxPlayerSize": 60
+          },
+          {
+            "id": "butterfly",
+            "weight": 1.5,
+            "maxPlayerSize": 90
+          },
+          {
+            "id": "daisy",
+            "weight": 2.5
+          },
+          {
+            "id": "hibiscus",
+            "weight": 1.5
+          },
+          {
+            "id": "sunflower",
+            "weight": 2
+          },
+          {
+            "id": "soccerBall",
+            "weight": 0.8
+          },
+          {
+            "id": "sheep",
+            "weight": 0.5
+          },
+          {
+            "id": "giraffe",
+            "weight": 0.15
+          },
+          {
+            "id": "horse",
+            "weight": 0.3
+          },
+          {
+            "id": "unicorn",
+            "weight": 0.04
+          },
+          {
+            "id": "rainbow",
+            "weight": 0.02
+          },
+          {
+            "id": "hotAirBalloon",
+            "weight": 0.05
+          }
+        ],
+        "fall": [
+          {
+            "id": "fallenLeaf",
+            "weight": 3,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "mapleLeaf",
+            "weight": 2.5,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "wheat",
+            "weight": 1.5
+          },
+          {
+            "id": "fox",
+            "weight": 0.6
+          },
+          {
+            "id": "pumpkin",
+            "weight": 0.8
+          },
+          {
+            "id": "sheep",
+            "weight": 0.5
+          },
+          {
+            "id": "bison",
+            "weight": 0.2
+          },
+          {
+            "id": "hotAirBalloon",
+            "weight": 0.04
+          },
+          {
+            "id": "horse",
+            "weight": 0.3
+          },
+          {
+            "id": "tornado",
+            "weight": 0.02
+          }
+        ],
+        "winter": [
+          {
+            "id": "snowflake",
+            "weight": 3,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "snowman",
+            "weight": 0.8
+          },
+          {
+            "id": "wolf",
+            "weight": 0.4
+          },
+          {
+            "id": "christmasTree",
+            "weight": 0.4
+          },
+          {
+            "id": "horse",
+            "weight": 0.25
+          },
+          {
+            "id": "deer",
+            "weight": 0.4
+          },
+          {
+            "id": "santa",
+            "weight": 0.03
+          },
+          {
+            "id": "comet",
+            "weight": 0.02
+          }
+        ]
+      },
+            "objectDensity": 0.5
+    },
+    "forest": {
+      "id": "forest",
+      "name": "Forest",
+      "description": "Dense woodland where ancient trees tower overhead. Watch for mushrooms and woodland creatures among the shadows.",
+      "location": "Northeast",
+      "colors": {
+        "spring": [
+          85,
+          150,
+          90
+        ],
+        "summer": [
+          60,
+          110,
+          55
+        ],
+        "fall": [
+          125,
+          105,
+          85
+        ],
+        "winter": [
+          185,
+          195,
+          205
+        ]
+      },
+      "objects": {
+        "spring": [
+          {
+            "id": "caterpillar",
+            "weight": 2,
+            "maxPlayerSize": 40
+          },
+          {
+            "id": "beetle",
+            "weight": 1.5,
+            "maxPlayerSize": 60
+          },
+          {
+            "id": "mushroom",
+            "weight": 2.5
+          },
+          {
+            "id": "squirrel",
+            "weight": 1.5,
+            "maxPlayerSize": 150
+          },
+          {
+            "id": "nest",
+            "weight": 1,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "bird",
+            "weight": 1,
+            "maxPlayerSize": 180
+          },
+          {
+            "id": "log",
+            "weight": 1
+          },
+          {
+            "id": "raccoon",
+            "weight": 0.5
+          },
+          {
+            "id": "tent",
+            "weight": 0.3
+          },
+          {
+            "id": "pineTree",
+            "weight": 1
+          },
+          {
+            "id": "deciduousTree",
+            "weight": 1
+          }
+        ],
+        "summer": [
+          {
+            "id": "beetle",
+            "weight": 1.5,
+            "maxPlayerSize": 60
+          },
+          {
+            "id": "blueberries",
+            "weight": 2,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "lizard",
+            "weight": 1.5,
+            "maxPlayerSize": 120
+          },
+          {
+            "id": "mushroom",
+            "weight": 2.5
+          },
+          {
+            "id": "squirrel",
+            "weight": 1.5,
+            "maxPlayerSize": 180
+          },
+          {
+            "id": "snake",
+            "weight": 0.8
+          },
+          {
+            "id": "log",
+            "weight": 1
+          },
+          {
+            "id": "bear",
+            "weight": 0.3
+          },
+          {
+            "id": "tent",
+            "weight": 0.4
+          },
+          {
+            "id": "campground",
+            "weight": 0.2
+          },
+          {
+            "id": "pineTree",
+            "weight": 1
+          },
+          {
+            "id": "deciduousTree",
+            "weight": 1
+          },
+          {
+            "id": "sloth",
+            "weight": 0.08
+          },
+          {
+            "id": "parrot",
+            "weight": 0.1
+          },
+          {
+            "id": "sauropod",
+            "weight": 0.02
+          },
+          {
+            "id": "phoenix",
+            "weight": 0.01
+          }
+        ],
+        "fall": [
+          {
+            "id": "fallenLeaf",
+            "weight": 3,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "chestnut",
+            "weight": 2,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "hedgehog",
+            "weight": 1.2,
+            "maxPlayerSize": 200
+          },
+          {
+            "id": "log",
+            "weight": 1
+          },
+          {
+            "id": "raccoon",
+            "weight": 0.6
+          },
+          {
+            "id": "badger",
+            "weight": 0.5
+          },
+          {
+            "id": "pumpkin",
+            "weight": 0.8
+          },
+          {
+            "id": "deer",
+            "weight": 0.5
+          },
+          {
+            "id": "pineTree",
+            "weight": 1
+          },
+          {
+            "id": "deciduousTree",
+            "weight": 1
+          },
+          {
+            "id": "ghost",
+            "weight": 0.1
+          },
+          {
+            "id": "gnome",
+            "weight": 0.05
+          }
+        ],
+        "winter": [
+          {
+            "id": "snowflake",
+            "weight": 2.5,
+            "maxPlayerSize": 120
+          },
+          {
+            "id": "log",
+            "weight": 1
+          },
+          {
+            "id": "wolf",
+            "weight": 0.5
+          },
+          {
+            "id": "deer",
+            "weight": 0.4
+          },
+          {
+            "id": "christmasTree",
+            "weight": 0.6
+          },
+          {
+            "id": "yeti",
+            "weight": 0.03
+          },
+          {
+            "id": "pineTree",
+            "weight": 1
+          }
+        ]
+      },
+            "objectDensity": 0.4
+    },
+    "wetland": {
+      "id": "wetland",
+      "name": "Wetland",
+      "description": "Marshy areas with ponds and streams. Frogs croak among the reeds and waterfowl glide across the surface.",
+      "location": "Northwest & West",
+      "colors": {
+        "spring": [
+          115,
+          175,
+          155
+        ],
+        "summer": [
+          95,
+          140,
+          120
+        ],
+        "fall": [
+          140,
+          145,
+          135
+        ],
+        "winter": [
+          195,
+          210,
+          220
+        ]
+      },
+      "objects": {
+        "spring": [
+          {
+            "id": "waterDrop",
+            "weight": 3,
+            "maxPlayerSize": 40
+          },
+          {
+            "id": "mosquito",
+            "weight": 2,
+            "maxPlayerSize": 30
+          },
+          {
+            "id": "seedling",
+            "weight": 2,
+            "maxPlayerSize": 60
+          },
+          {
+            "id": "frog",
+            "weight": 2,
+            "maxPlayerSize": 160
+          },
+          {
+            "id": "turtle",
+            "weight": 1,
+            "maxPlayerSize": 250
+          },
+          {
+            "id": "duck",
+            "weight": 1,
+            "maxPlayerSize": 300
+          },
+          {
+            "id": "swan",
+            "weight": 0.6
+          },
+          {
+            "id": "beaver",
+            "weight": 0.5
+          },
+          {
+            "id": "canoe",
+            "weight": 0.3
+          }
+        ],
+        "summer": [
+          {
+            "id": "mosquito",
+            "weight": 2.5,
+            "maxPlayerSize": 30
+          },
+          {
+            "id": "fish",
+            "weight": 2,
+            "maxPlayerSize": 150
+          },
+          {
+            "id": "frog",
+            "weight": 1.5,
+            "maxPlayerSize": 180
+          },
+          {
+            "id": "lotus",
+            "weight": 1.5
+          },
+          {
+            "id": "turtle",
+            "weight": 1,
+            "maxPlayerSize": 250
+          },
+          {
+            "id": "duck",
+            "weight": 1.2,
+            "maxPlayerSize": 300
+          },
+          {
+            "id": "swan",
+            "weight": 0.6
+          },
+          {
+            "id": "beaver",
+            "weight": 0.5
+          },
+          {
+            "id": "flamingo",
+            "weight": 0.4
+          },
+          {
+            "id": "crocodile",
+            "weight": 0.3
+          },
+          {
+            "id": "hippo",
+            "weight": 0.15
+          },
+          {
+            "id": "canoe",
+            "weight": 0.3
+          }
+        ],
+        "fall": [
+          {
+            "id": "fallenLeaf",
+            "weight": 2.5,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "chestnut",
+            "weight": 2,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "frog",
+            "weight": 1,
+            "maxPlayerSize": 160
+          },
+          {
+            "id": "duck",
+            "weight": 1,
+            "maxPlayerSize": 300
+          },
+          {
+            "id": "beaver",
+            "weight": 0.6
+          },
+          {
+            "id": "canoe",
+            "weight": 0.25
+          }
+        ],
+        "winter": [
+          {
+            "id": "snowflake",
+            "weight": 3,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "ice",
+            "weight": 1.5
+          },
+          {
+            "id": "beaver",
+            "weight": 0.4
+          }
+        ]
+      },
+            "objectDensity": 0.35,
+      "terrainSpeed": "wetland"
+    },
+    "beach": {
+      "id": "beach",
+      "name": "Beach",
+      "description": "Sandy shores where the land meets water. Collect shells and watch crabs scuttle across the warm sand.",
+      "location": "Southwest",
+      "colors": {
+        "spring": [
+          215,
+          205,
+          165
+        ],
+        "summer": [
+          245,
+          230,
+          175
+        ],
+        "fall": [
+          210,
+          195,
+          155
+        ],
+        "winter": [
+          230,
+          235,
+          240
+        ]
+      },
+      "objects": {
+        "spring": [
+          {
+            "id": "waterDrop",
+            "weight": 2,
+            "maxPlayerSize": 50
+          },
+          {
+            "id": "shell",
+            "weight": 2.5,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "crab",
+            "weight": 1.5,
+            "maxPlayerSize": 180
+          },
+          {
+            "id": "turtle",
+            "weight": 0.8,
+            "maxPlayerSize": 250
+          },
+          {
+            "id": "bucket",
+            "weight": 0.8
+          },
+          {
+            "id": "hut",
+            "weight": 0.3
+          },
+          {
+            "id": "palmTree",
+            "weight": 0.4
+          }
+        ],
+        "summer": [
+          {
+            "id": "salt",
+            "weight": 1.5,
+            "maxPlayerSize": 60
+          },
+          {
+            "id": "shell",
+            "weight": 2.5,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "iceCream",
+            "weight": 2,
+            "maxPlayerSize": 130
+          },
+          {
+            "id": "crab",
+            "weight": 1.8,
+            "maxPlayerSize": 180
+          },
+          {
+            "id": "turtle",
+            "weight": 0.8,
+            "maxPlayerSize": 250
+          },
+          {
+            "id": "volleyball",
+            "weight": 1.2
+          },
+          {
+            "id": "bucket",
+            "weight": 1
+          },
+          {
+            "id": "suitcase",
+            "weight": 0.7
+          },
+          {
+            "id": "flamingo",
+            "weight": 0.4
+          },
+          {
+            "id": "guitar",
+            "weight": 0.4
+          },
+          {
+            "id": "beachUmbrella",
+            "weight": 0.5
+          },
+          {
+            "id": "palmTree",
+            "weight": 0.5
+          },
+          {
+            "id": "circus",
+            "weight": 0.3
+          },
+          {
+            "id": "hut",
+            "weight": 0.3
+          },
+          {
+            "id": "camel",
+            "weight": 0.2
+          },
+          {
+            "id": "canoe",
+            "weight": 0.3
+          },
+          {
+            "id": "moai",
+            "weight": 0.08
+          },
+          {
+            "id": "surfer",
+            "weight": 0.15
+          },
+          {
+            "id": "mermaid",
+            "weight": 0.05
+          }
+        ],
+        "fall": [
+          {
+            "id": "fallenLeaf",
+            "weight": 2,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "shell",
+            "weight": 2,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "crab",
+            "weight": 1.2,
+            "maxPlayerSize": 180
+          },
+          {
+            "id": "bucket",
+            "weight": 0.6
+          },
+          {
+            "id": "palmTree",
+            "weight": 0.4
+          },
+          {
+            "id": "hut",
+            "weight": 0.25
+          },
+          {
+            "id": "moai",
+            "weight": 0.08
+          }
+        ],
+        "winter": [
+          {
+            "id": "snowflake",
+            "weight": 3,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "shell",
+            "weight": 1.5,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "seal",
+            "weight": 0.5
+          },
+          {
+            "id": "penguin",
+            "weight": 0.6
+          },
+          {
+            "id": "polarBear",
+            "weight": 0.15
+          }
+        ]
+      },
+            "objectDensity": 0.45,
+      "terrainSpeed": "beach"
+    },
+    "farmland": {
+      "id": "farmland",
+      "name": "Farmland",
+      "description": "Cultivated fields and gardens with crops arranged in neat rows. Farm animals roam freely between patches.",
+      "location": "Southeast",
+      "colors": {
+        "spring": [
+          155,
+          180,
+          120
+        ],
+        "summer": [
+          170,
+          165,
+          90
+        ],
+        "fall": [
+          180,
+          155,
+          110
+        ],
+        "winter": [
+          220,
+          225,
+          230
+        ]
+      },
+      "objects": {
+        "spring": [
+          {
+            "id": "seedling",
+            "weight": 2.5,
+            "maxPlayerSize": 60
+          },
+          {
+            "id": "hatching",
+            "weight": 2,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "egg",
+            "weight": 1.5,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "carrot",
+            "weight": 2,
+            "maxPlayerSize": 120
+          },
+          {
+            "id": "lettuce",
+            "weight": 1.5
+          },
+          {
+            "id": "chick",
+            "weight": 1.5,
+            "maxPlayerSize": 120
+          },
+          {
+            "id": "rabbit",
+            "weight": 0.8,
+            "maxPlayerSize": 250
+          },
+          {
+            "id": "box",
+            "weight": 0.8
+          },
+          {
+            "id": "basket",
+            "weight": 0.8
+          },
+          {
+            "id": "pig",
+            "weight": 0.5
+          },
+          {
+            "id": "sheep",
+            "weight": 0.5
+          },
+          {
+            "id": "cow",
+            "weight": 0.3
+          },
+          {
+            "id": "horse",
+            "weight": 0.25
+          },
+          {
+            "id": "shed",
+            "weight": 0.3
+          },
+          {
+            "id": "house",
+            "weight": 0.25
+          }
+        ],
+        "summer": [
+          {
+            "id": "beans",
+            "weight": 2,
+            "maxPlayerSize": 50
+          },
+          {
+            "id": "tomato",
+            "weight": 2,
+            "maxPlayerSize": 120
+          },
+          {
+            "id": "cucumber",
+            "weight": 1.5
+          },
+          {
+            "id": "strawberry",
+            "weight": 1.5,
+            "maxPlayerSize": 120
+          },
+          {
+            "id": "chicken",
+            "weight": 1.5,
+            "maxPlayerSize": 200
+          },
+          {
+            "id": "corn",
+            "weight": 2
+          },
+          {
+            "id": "sunflower",
+            "weight": 1.5
+          },
+          {
+            "id": "watermelon",
+            "weight": 1
+          },
+          {
+            "id": "pig",
+            "weight": 0.6
+          },
+          {
+            "id": "sheep",
+            "weight": 0.5
+          },
+          {
+            "id": "cow",
+            "weight": 0.35
+          },
+          {
+            "id": "horse",
+            "weight": 0.3
+          },
+          {
+            "id": "tractor",
+            "weight": 0.2
+          },
+          {
+            "id": "shed",
+            "weight": 0.3
+          },
+          {
+            "id": "house",
+            "weight": 0.25
+          },
+          {
+            "id": "ufo",
+            "weight": 0.03
+          },
+          {
+            "id": "alien",
+            "weight": 0.05
+          }
+        ],
+        "fall": [
+          {
+            "id": "chestnut",
+            "weight": 2,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "apple",
+            "weight": 2,
+            "maxPlayerSize": 120
+          },
+          {
+            "id": "onion",
+            "weight": 1.5
+          },
+          {
+            "id": "potato",
+            "weight": 1.5
+          },
+          {
+            "id": "corn",
+            "weight": 2
+          },
+          {
+            "id": "basket",
+            "weight": 1
+          },
+          {
+            "id": "turkey",
+            "weight": 0.6
+          },
+          {
+            "id": "pumpkin",
+            "weight": 1.2
+          },
+          {
+            "id": "pig",
+            "weight": 0.5
+          },
+          {
+            "id": "hayBale",
+            "weight": 0.6
+          },
+          {
+            "id": "cow",
+            "weight": 0.3
+          },
+          {
+            "id": "horse",
+            "weight": 0.25
+          },
+          {
+            "id": "tractor",
+            "weight": 0.2
+          },
+          {
+            "id": "shed",
+            "weight": 0.3
+          },
+          {
+            "id": "house",
+            "weight": 0.25
+          }
+        ],
+        "winter": [
+          {
+            "id": "snowflake",
+            "weight": 2.5,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "gift",
+            "weight": 2
+          },
+          {
+            "id": "snowman",
+            "weight": 0.8
+          },
+          {
+            "id": "cow",
+            "weight": 0.25
+          },
+          {
+            "id": "horse",
+            "weight": 0.2
+          },
+          {
+            "id": "shed",
+            "weight": 0.3
+          },
+          {
+            "id": "house",
+            "weight": 0.25
+          }
+        ]
+      },
+            "objectDensity": 0.55
+    },
+    "village": {
+      "id": "village",
+      "name": "Village",
+      "description": "A cozy settlement with homes and gathering places. Seasonal decorations adorn the buildings.",
+      "location": "Within Farmland",
+      "colors": {
+        "spring": [
+          175,
+          185,
+          150
+        ],
+        "summer": [
+          190,
+          175,
+          135
+        ],
+        "fall": [
+          180,
+          160,
+          135
+        ],
+        "winter": [
+          225,
+          225,
+          230
+        ]
+      },
+      "objects": {
+        "spring": [
+          {
+            "id": "blossom",
+            "weight": 2,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "tulip",
+            "weight": 1.5,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "hyacinth",
+            "weight": 1.2
+          },
+          {
+            "id": "bird",
+            "weight": 1,
+            "maxPlayerSize": 180
+          },
+          {
+            "id": "box",
+            "weight": 0.8
+          },
+          {
+            "id": "dog",
+            "weight": 0.6
+          },
+          {
+            "id": "cat",
+            "weight": 0.6
+          },
+          {
+            "id": "pottedPlant",
+            "weight": 0.7
+          },
+          {
+            "id": "mailbox",
+            "weight": 0.5
+          },
+          {
+            "id": "umbrella",
+            "weight": 0.4
+          },
+          {
+            "id": "bicycle",
+            "weight": 0.4
+          },
+          {
+            "id": "fountain",
+            "weight": 0.2
+          },
+          {
+            "id": "house",
+            "weight": 0.35
+          },
+          {
+            "id": "shop",
+            "weight": 0.2
+          }
+        ],
+        "summer": [
+          {
+            "id": "daisy",
+            "weight": 1.5,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "rose",
+            "weight": 1
+          },
+          {
+            "id": "dog",
+            "weight": 0.6
+          },
+          {
+            "id": "cat",
+            "weight": 0.6
+          },
+          {
+            "id": "mailbox",
+            "weight": 0.5
+          },
+          {
+            "id": "chair",
+            "weight": 0.6
+          },
+          {
+            "id": "trashCan",
+            "weight": 0.5
+          },
+          {
+            "id": "bicycle",
+            "weight": 0.5
+          },
+          {
+            "id": "scooter",
+            "weight": 0.3
+          },
+          {
+            "id": "basketball",
+            "weight": 0.6
+          },
+          {
+            "id": "car",
+            "weight": 0.3
+          },
+          {
+            "id": "fountain",
+            "weight": 0.25
+          },
+          {
+            "id": "house",
+            "weight": 0.35
+          },
+          {
+            "id": "shop",
+            "weight": 0.25
+          },
+          {
+            "id": "van",
+            "weight": 0.2
+          },
+          {
+            "id": "bus",
+            "weight": 0.15
+          },
+          {
+            "id": "ferrisWheel",
+            "weight": 0.08
+          },
+          {
+            "id": "carousel",
+            "weight": 0.04
+          },
+          {
+            "id": "robot",
+            "weight": 0.03
+          },
+          {
+            "id": "statueOfLiberty",
+            "weight": 0.01
+          },
+          {
+            "id": "clown",
+            "weight": 0.04
+          }
+        ],
+        "fall": [
+          {
+            "id": "fallenLeaf",
+            "weight": 2.5,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "broom",
+            "weight": 0.6
+          },
+          {
+            "id": "pumpkin",
+            "weight": 0.8
+          },
+          {
+            "id": "dog",
+            "weight": 0.5
+          },
+          {
+            "id": "cat",
+            "weight": 0.5
+          },
+          {
+            "id": "mailbox",
+            "weight": 0.5
+          },
+          {
+            "id": "chair",
+            "weight": 0.5
+          },
+          {
+            "id": "umbrella",
+            "weight": 0.5
+          },
+          {
+            "id": "car",
+            "weight": 0.25
+          },
+          {
+            "id": "house",
+            "weight": 0.35
+          },
+          {
+            "id": "shop",
+            "weight": 0.2
+          },
+          {
+            "id": "van",
+            "weight": 0.15
+          },
+          {
+            "id": "crown",
+            "weight": 0.02
+          }
+        ],
+        "winter": [
+          {
+            "id": "snowflake",
+            "weight": 2,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "gift",
+            "weight": 2.5
+          },
+          {
+            "id": "nestingDoll",
+            "weight": 0.6
+          },
+          {
+            "id": "dog",
+            "weight": 0.4
+          },
+          {
+            "id": "cat",
+            "weight": 0.4
+          },
+          {
+            "id": "snowman",
+            "weight": 0.7
+          },
+          {
+            "id": "christmasTree",
+            "weight": 0.6
+          },
+          {
+            "id": "car",
+            "weight": 0.2
+          },
+          {
+            "id": "house",
+            "weight": 0.35
+          },
+          {
+            "id": "shop",
+            "weight": 0.2
+          },
+          {
+            "id": "bus",
+            "weight": 0.1
+          }
+        ]
+      },
+            "objectDensity": 0.35
+    },
+    "orchard": {
+      "id": "orchard",
+      "name": "Orchard",
+      "description": "Rows of fruit trees in organized groves. Blossoms in spring give way to ripe fruit in fall.",
+      "location": "East",
+      "colors": {
+        "spring": [
+          140,
+          190,
+          125
+        ],
+        "summer": [
+          120,
+          155,
+          85
+        ],
+        "fall": [
+          165,
+          145,
+          105
+        ],
+        "winter": [
+          210,
+          215,
+          220
+        ]
+      },
+      "objects": {
+        "spring": [
+          {
+            "id": "bee",
+            "weight": 2,
+            "maxPlayerSize": 50
+          },
+          {
+            "id": "blossom",
+            "weight": 3,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "nest",
+            "weight": 0.8,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "bird",
+            "weight": 1,
+            "maxPlayerSize": 180
+          },
+          {
+            "id": "basket",
+            "weight": 0.6
+          },
+          {
+            "id": "deciduousTree",
+            "weight": 0.8
+          }
+        ],
+        "summer": [
+          {
+            "id": "apple",
+            "weight": 2,
+            "maxPlayerSize": 120
+          },
+          {
+            "id": "pear",
+            "weight": 2,
+            "maxPlayerSize": 120
+          },
+          {
+            "id": "peach",
+            "weight": 1.5,
+            "maxPlayerSize": 120
+          },
+          {
+            "id": "orange",
+            "weight": 1.5
+          },
+          {
+            "id": "lemon",
+            "weight": 1.5
+          },
+          {
+            "id": "bird",
+            "weight": 0.8,
+            "maxPlayerSize": 180
+          },
+          {
+            "id": "basket",
+            "weight": 0.7
+          },
+          {
+            "id": "deciduousTree",
+            "weight": 0.8
+          }
+        ],
+        "fall": [
+          {
+            "id": "fallenLeaf",
+            "weight": 2,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "apple",
+            "weight": 3
+          },
+          {
+            "id": "pear",
+            "weight": 2
+          },
+          {
+            "id": "grapes",
+            "weight": 1.5
+          },
+          {
+            "id": "basket",
+            "weight": 1
+          },
+          {
+            "id": "deciduousTree",
+            "weight": 0.8
+          }
+        ],
+        "winter": [
+          {
+            "id": "snowflake",
+            "weight": 2,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "deciduousTree",
+            "weight": 0.8
+          }
+        ]
+      },
+            "objectDensity": 0.45
+    },
+    "hills": {
+      "id": "hills",
+      "name": "Hills",
+      "description": "Rocky elevated terrain with sparse vegetation. Large boulders dot the landscape.",
+      "location": "South",
+      "colors": {
+        "spring": [
+          150,
+          175,
+          135
+        ],
+        "summer": [
+          165,
+          165,
+          115
+        ],
+        "fall": [
+          165,
+          150,
+          125
+        ],
+        "winter": [
+          215,
+          220,
+          225
+        ]
+      },
+      "objects": {
+        "spring": [
+          {
+            "id": "daisy",
+            "weight": 2,
+            "maxPlayerSize": 100
+          },
+          {
+            "id": "butterfly",
+            "weight": 1.5,
+            "maxPlayerSize": 90
+          },
+          {
+            "id": "goat",
+            "weight": 0.5
+          },
+          {
+            "id": "rock",
+            "weight": 0.8
+          },
+          {
+            "id": "rock",
+            "weight": 0.5
+          }
+        ],
+        "summer": [
+          {
+            "id": "lizard",
+            "weight": 1.5,
+            "maxPlayerSize": 120
+          },
+          {
+            "id": "snake",
+            "weight": 0.6
+          },
+          {
+            "id": "cactus",
+            "weight": 0.5
+          },
+          {
+            "id": "goat",
+            "weight": 0.6
+          },
+          {
+            "id": "rhino",
+            "weight": 0.15
+          },
+          {
+            "id": "rock",
+            "weight": 1
+          },
+          {
+            "id": "rock",
+            "weight": 0.5
+          },
+          {
+            "id": "volcano",
+            "weight": 0.02
+          },
+          {
+            "id": "trex",
+            "weight": 0.02
+          }
+        ],
+        "fall": [
+          {
+            "id": "fallenLeaf",
+            "weight": 2.5,
+            "maxPlayerSize": 80
+          },
+          {
+            "id": "goat",
+            "weight": 0.5
+          },
+          {
+            "id": "bison",
+            "weight": 0.2
+          },
+          {
+            "id": "rock",
+            "weight": 0.8
+          },
+          {
+            "id": "rock",
+            "weight": 0.5
+          },
+          {
+            "id": "castle",
+            "weight": 0.05
+          },
+          {
+            "id": "dragon",
+            "weight": 0.01
+          },
+          {
+            "id": "diamond",
+            "weight": 0.02
+          }
+        ],
+        "winter": [
+          {
+            "id": "snowflake",
+            "weight": 2.5,
+            "maxPlayerSize": 120
+          },
+          {
+            "id": "goat",
+            "weight": 0.4
+          },
+          {
+            "id": "mammoth",
+            "weight": 0.1
+          },
+          {
+            "id": "rock",
+            "weight": 0.8
+          },
+          {
+            "id": "rock",
+            "weight": 0.5
+          },
+          {
+            "id": "snowMountain",
+            "weight": 0.1
+          },
+          {
+            "id": "castle",
+            "weight": 0.05
+          },
+          {
+            "id": "diamond",
+            "weight": 0.02
+          }
+        ]
+      },
+            "objectDensity": 0.3
+    }
+  }
+}

@@ -1,0 +1,2745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasonal Growth - Game Manual</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5a27 0%, #1a3a15 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .world-map {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .world-map h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #2d5a27;
+        }
+
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            max-width: 400px;
+            margin: 0 auto;
+            border: 3px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .map-cell {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85em;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            padding: 8px;
+            text-align: center;
+        }
+
+        .map-legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+
+        .biomes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .biome-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .biome-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .biome-header {
+            padding: 15px 20px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .biome-header h3 {
+            font-size: 1.4em;
+            margin-bottom: 5px;
+        }
+
+        .biome-header p {
+            font-size: 0.9em;
+            opacity: 0.95;
+        }
+
+        .terrain-colors {
+            display: flex;
+            height: 8px;
+        }
+
+        .terrain-color {
+            flex: 1;
+        }
+
+        .biome-content {
+            padding: 20px;
+        }
+
+        .season-section {
+            margin-bottom: 15px;
+        }
+
+        .season-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .season-title {
+            font-weight: bold;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .season-spring { color: #4a9c4a; }
+        .season-summer { color: #d4a520; }
+        .season-fall { color: #c65d3d; }
+        .season-winter { color: #5a8fbd; }
+
+        .objects-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .object-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+        }
+
+        .object-emoji {
+            font-size: 1.2em;
+        }
+
+        .boundaries-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .boundaries-title {
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .boundary-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #ffe0e0;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin-right: 8px;
+        }
+
+        .location-badge {
+            display: inline-block;
+            background: rgba(0,0,0,0.1);
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            margin-top: 8px;
+        }
+
+        .biome-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        /* Object Reference Section */
+        .objects-reference {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .objects-reference h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #2d5a27;
+        }
+
+        .objects-reference > p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        .objects-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+        }
+
+        .objects-table th {
+            background: #2d5a27;
+            color: white;
+            padding: 10px 8px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+        }
+
+        .objects-table td {
+            padding: 8px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: middle;
+        }
+
+        .objects-table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .objects-table .emoji-cell {
+            font-size: 1.4em;
+            text-align: center;
+            width: 40px;
+        }
+
+        .objects-table .name-cell {
+            font-weight: 500;
+        }
+
+        .objects-table .size-cell {
+            font-family: monospace;
+            color: #555;
+        }
+
+        .objects-table .player-size-cell {
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .objects-table .biome-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+        }
+
+        .objects-table .biome-tag {
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.8em;
+            color: white;
+        }
+
+        .objects-table .season-tags {
+            display: flex;
+            gap: 4px;
+        }
+
+        .objects-table .season-tag {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            color: white;
+            font-weight: bold;
+        }
+
+        .tag-ocean { background: rgb(55, 115, 160); }
+        .tag-meadow { background: rgb(145, 190, 125); }
+        .tag-forest { background: rgb(75, 115, 75); }
+        .tag-wetland { background: rgb(110, 155, 150); }
+        .tag-beach { background: rgb(210, 195, 155); color: #333 !important; }
+        .tag-farmland { background: rgb(155, 160, 115); }
+        .tag-village { background: rgb(175, 165, 145); color: #333 !important; }
+        .tag-orchard { background: rgb(135, 165, 115); }
+        .tag-hills { background: rgb(150, 160, 135); }
+
+        .tag-spring { background: #4a9c4a; }
+        .tag-summer { background: #d4a520; }
+        .tag-fall { background: #c65d3d; }
+        .tag-winter { background: #5a8fbd; }
+
+        .player-range {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .player-min { color: #4a9c4a; }
+        .player-max { color: #c65d3d; }
+        .player-any { color: #888; font-style: italic; }
+
+        .table-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Info sections */
+        .info-section {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .info-section h2 {
+            color: #2d5a27;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .info-box {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2d5a27;
+        }
+
+        .info-box h3 {
+            color: #2d5a27;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .info-box p {
+            font-size: 0.95em;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .info-box li {
+            margin-bottom: 5px;
+        }
+
+        .controls-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .controls-table td {
+            padding: 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .controls-table td:first-child {
+            font-weight: bold;
+            width: 100px;
+            color: #2d5a27;
+        }
+
+        .progression-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+
+        .progression-table th {
+            background: #2d5a27;
+            color: white;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .progression-table td {
+            padding: 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .toc {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .toc a {
+            background: rgba(255,255,255,0.9);
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #2d5a27;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .toc a:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .generated-note {
+            text-align: center;
+            font-size: 0.8em;
+            color: rgba(255,255,255,0.5);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Seasonal Growth</h1>
+            <p>A Katamari-inspired rolling adventure through 10 seasons. Grow from a tiny ball to planetary scale and roll up the Sun!</p>
+        </header>
+
+        <nav class="toc">
+            <a href="#how-to-play">How to Play</a>
+            <a href="#controls">Controls</a>
+            <a href="#progression">Progression</a>
+            <a href="#world-map">World Map</a>
+            <a href="#biomes">Biomes</a>
+            <a href="#objects">Objects</a>
+        </nav>
+
+        <!-- How to Play Section -->
+        <section class="info-section" id="how-to-play">
+            <h2>How to Play</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>Goal</h3>
+                    <p>Roll up objects smaller than you to grow larger. As you grow, you can collect bigger objects. Your ultimate goal is to grow large enough to exit the planet and roll up THE SUN!</p>
+                </div>
+                <div class="info-box">
+                    <h3>Collection Rule</h3>
+                    <p>You can only collect objects that are <strong>smaller than 80%</strong> of your size. Larger objects will bounce you away! The bigger you get, the more objects become available to collect.</p>
+                </div>
+                <div class="info-box">
+                    <h3>World</h3>
+                    <p>The game takes place on a procedurally generated island with 8 unique biomes, surrounded by ocean. The world wraps around seamlessly - roll off one edge and you'll appear on the other side!</p>
+                </div>
+                <div class="info-box">
+                    <h3>Seasons</h3>
+                    <p>The game progresses through 10 seasons (30 seconds each): Spring, Summer, Fall, Winter - repeated across 2.5 years. Each season brings different objects to collect!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Controls Section -->
+        <section class="info-section" id="controls">
+            <h2>Controls</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>Movement</h3>
+                    <table class="controls-table">
+                        <tr><td>Up</td><td>Roll forward</td></tr>
+                        <tr><td>Down</td><td>Roll backward</td></tr>
+                        <tr><td>Left</td><td>Roll left</td></tr>
+                        <tr><td>Right</td><td>Roll right</td></tr>
+                        <tr><td>1P START</td><td>Start game / Restart</td></tr>
+                    </table>
+                </div>
+                <div class="info-box">
+                    <h3>Physics</h3>
+                    <p>Your ball has momentum-based physics:</p>
+                    <ul>
+                        <li><strong>Bigger = more inertia</strong> - harder to turn but slides more</li>
+                        <li><strong>Terrain affects speed</strong> - sand/water slows you down</li>
+                        <li><strong>Speed increases with size</strong> - but so does momentum</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progression Section -->
+        <section class="info-section" id="progression">
+            <h2>Progression</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>Growth Milestones</h3>
+                    <table class="progression-table">
+                        <tr><th>Size</th><th>What You Can Do</th></tr>
+                        <tr><td>12px</td><td>Starting size - collect tiny insects and flowers</td></tr>
+                        <tr><td>30-50px</td><td>Collect fruits, small animals</td></tr>
+                        <tr><td>70-100px</td><td>Roll up trees, boulders</td></tr>
+                        <tr><td>100-150px</td><td>Roll up houses, large structures</td></tr>
+                        <tr><td>200-300px</td><td>Roll up whales in the ocean</td></tr>
+                        <tr><td>380px+</td><td>Large enough to roll up THE SUN</td></tr>
+                    </table>
+                </div>
+                <div class="info-box">
+                    <h3>Season Progression</h3>
+                    <p>The game progresses through 10 seasons over ~5 minutes:</p>
+                    <ul>
+                        <li>Year 1: Spring, Summer, Fall, Winter</li>
+                        <li>Year 2: Spring, Summer, Fall, Winter</li>
+                        <li>Year 3: Spring, <strong>Summer (Final!)</strong></li>
+                    </ul>
+                    <p>THE SUN appears in the final Summer!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="world-map" id="world-map">
+            <h2>World Map</h2>
+            <div class="map-grid">
+                <div class="map-cell" style="background: rgb(95, 140, 120);">Wetland</div>
+                <div class="map-cell" style="background: rgb(175, 185, 95);">Meadow</div>
+                <div class="map-cell" style="background: rgb(60, 110, 55);">Forest</div>
+                <div class="map-cell" style="background: rgb(95, 140, 120);">Wetland</div>
+                <div class="map-cell" style="background: rgb(175, 185, 95); border: 3px solid gold;">Meadow (Start)</div>
+                <div class="map-cell" style="background: rgb(120, 155, 85);">Orchard</div>
+                <div class="map-cell" style="background: rgb(245, 230, 175);">Beach</div>
+                <div class="map-cell" style="background: rgb(165, 165, 115);">Hills</div>
+                <div class="map-cell" style="background: rgb(170, 165, 90);">Farmland / Village</div>
+            </div>
+            <p class="map-legend">Each zone influences which biomes appear, but boundaries blend organically based on terrain!</p>
+        </section>
+
+        <div class="biomes-grid" id="biomes">
+
+            <!-- Meadow -->
+            <article class="biome-card">
+                <div class="biome-header" style="background: linear-gradient(135deg, rgb(145, 215, 130), rgb(175, 185, 95));">
+                    <h3>Meadow</h3>
+                    <p>Open grasslands filled with wildflowers and buzzing insects. A peaceful place to begin your journey.</p>
+                    <span class="location-badge">Center & North</span>
+                </div>
+                <div class="terrain-colors">
+                    <div class="terrain-color" style="background: rgb(145, 215, 130);" title="Spring"></div>
+                    <div class="terrain-color" style="background: rgb(175, 185, 95);" title="Summer"></div>
+                    <div class="terrain-color" style="background: rgb(185, 165, 120);" title="Fall"></div>
+                    <div class="terrain-color" style="background: rgb(225, 230, 235);" title="Winter"></div>
+                </div>
+                <div class="biome-content">
+                    <div class="season-section">
+                        <div class="season-title season-spring">Spring</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🐜</span> Ant</span>
+                            <span class="object-item"><span class="object-emoji">🐝</span> Bee</span>
+                            <span class="object-item"><span class="object-emoji">🍀</span> Clover</span>
+                            <span class="object-item"><span class="object-emoji">🌸</span> Cherry Blossom</span>
+                            <span class="object-item"><span class="object-emoji">🌷</span> Tulip</span>
+                            <span class="object-item"><span class="object-emoji">🦋</span> Butterfly</span>
+                            <span class="object-item"><span class="object-emoji">🌼</span> Daisy</span>
+                            <span class="object-item"><span class="object-emoji">🐦</span> Bird</span>
+                            <span class="object-item"><span class="object-emoji">🌻</span> Sunflower</span>
+                            <span class="object-item"><span class="object-emoji">🐰</span> Rabbit</span>
+                            <span class="object-item"><span class="object-emoji">🐑</span> Sheep</span>
+                            <span class="object-item"><span class="object-emoji">🐎</span> Horse</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-summer">Summer</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🐜</span> Ant</span>
+                            <span class="object-item"><span class="object-emoji">🐞</span> Ladybug</span>
+                            <span class="object-item"><span class="object-emoji">🦗</span> Cricket</span>
+                            <span class="object-item"><span class="object-emoji">🦋</span> Butterfly</span>
+                            <span class="object-item"><span class="object-emoji">🌼</span> Daisy</span>
+                            <span class="object-item"><span class="object-emoji">🌺</span> Hibiscus</span>
+                            <span class="object-item"><span class="object-emoji">🌻</span> Sunflower</span>
+                            <span class="object-item"><span class="object-emoji">⚽</span> Soccer Ball</span>
+                            <span class="object-item"><span class="object-emoji">🐑</span> Sheep</span>
+                            <span class="object-item"><span class="object-emoji">🦒</span> Giraffe</span>
+                            <span class="object-item"><span class="object-emoji">🐎</span> Horse</span>
+                            <span class="object-item"><span class="object-emoji">🦄</span> Unicorn</span>
+                            <span class="object-item"><span class="object-emoji">🌈</span> Rainbow</span>
+                            <span class="object-item"><span class="object-emoji">🎈</span> Hot Air Balloon</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-fall">Fall</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🍂</span> Fallen Leaf</span>
+                            <span class="object-item"><span class="object-emoji">🍁</span> Maple Leaf</span>
+                            <span class="object-item"><span class="object-emoji">🌾</span> Wheat</span>
+                            <span class="object-item"><span class="object-emoji">🦊</span> Fox</span>
+                            <span class="object-item"><span class="object-emoji">🎃</span> Pumpkin</span>
+                            <span class="object-item"><span class="object-emoji">🐑</span> Sheep</span>
+                            <span class="object-item"><span class="object-emoji">🦬</span> Bison</span>
+                            <span class="object-item"><span class="object-emoji">🎈</span> Hot Air Balloon</span>
+                            <span class="object-item"><span class="object-emoji">🐎</span> Horse</span>
+                            <span class="object-item"><span class="object-emoji">🌪️</span> Tornado</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-winter">Winter</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">❄️</span> Snowflake</span>
+                            <span class="object-item"><span class="object-emoji">⛄</span> Snowman</span>
+                            <span class="object-item"><span class="object-emoji">🐺</span> Wolf</span>
+                            <span class="object-item"><span class="object-emoji">🎄</span> Christmas Tree</span>
+                            <span class="object-item"><span class="object-emoji">🐎</span> Horse</span>
+                            <span class="object-item"><span class="object-emoji">🦌</span> Deer</span>
+                            <span class="object-item"><span class="object-emoji">🎅</span> Santa Claus</span>
+                            <span class="object-item"><span class="object-emoji">☄️</span> Comet</span>
+                        </div>
+                    </div>
+                    <div class="boundaries-section">
+                        <div class="boundaries-title">Large Objects (rollable at size &ge;64+)</div>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🐎</span> Horse</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🦒</span> Giraffe</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🌈</span> Rainbow</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🎈</span> Hot Air Balloon</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🦬</span> Bison</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🌪️</span> Tornado</span>
+                    </div>
+                    <div class="biome-stats">
+                        <span>Density: High</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Forest -->
+            <article class="biome-card">
+                <div class="biome-header" style="background: linear-gradient(135deg, rgb(85, 150, 90), rgb(60, 110, 55));">
+                    <h3>Forest</h3>
+                    <p>Dense woodland where ancient trees tower overhead. Watch for mushrooms and woodland creatures among the shadows.</p>
+                    <span class="location-badge">Northeast</span>
+                </div>
+                <div class="terrain-colors">
+                    <div class="terrain-color" style="background: rgb(85, 150, 90);" title="Spring"></div>
+                    <div class="terrain-color" style="background: rgb(60, 110, 55);" title="Summer"></div>
+                    <div class="terrain-color" style="background: rgb(125, 105, 85);" title="Fall"></div>
+                    <div class="terrain-color" style="background: rgb(185, 195, 205);" title="Winter"></div>
+                </div>
+                <div class="biome-content">
+                    <div class="season-section">
+                        <div class="season-title season-spring">Spring</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🐛</span> Caterpillar</span>
+                            <span class="object-item"><span class="object-emoji">🪲</span> Beetle</span>
+                            <span class="object-item"><span class="object-emoji">🍄</span> Mushroom</span>
+                            <span class="object-item"><span class="object-emoji">🐿️</span> Squirrel</span>
+                            <span class="object-item"><span class="object-emoji">🪺</span> Bird Nest</span>
+                            <span class="object-item"><span class="object-emoji">🐦</span> Bird</span>
+                            <span class="object-item"><span class="object-emoji">🪵</span> Log</span>
+                            <span class="object-item"><span class="object-emoji">🦝</span> Raccoon</span>
+                            <span class="object-item"><span class="object-emoji">⛺</span> Tent</span>
+                            <span class="object-item"><span class="object-emoji">🌲</span> Pine Tree</span>
+                            <span class="object-item"><span class="object-emoji">🌳</span> Oak Tree</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-summer">Summer</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🪲</span> Beetle</span>
+                            <span class="object-item"><span class="object-emoji">🫐</span> Blueberries</span>
+                            <span class="object-item"><span class="object-emoji">🦎</span> Lizard</span>
+                            <span class="object-item"><span class="object-emoji">🍄</span> Mushroom</span>
+                            <span class="object-item"><span class="object-emoji">🐿️</span> Squirrel</span>
+                            <span class="object-item"><span class="object-emoji">🐍</span> Snake</span>
+                            <span class="object-item"><span class="object-emoji">🪵</span> Log</span>
+                            <span class="object-item"><span class="object-emoji">🐻</span> Bear</span>
+                            <span class="object-item"><span class="object-emoji">⛺</span> Tent</span>
+                            <span class="object-item"><span class="object-emoji">🏕️</span> Campground</span>
+                            <span class="object-item"><span class="object-emoji">🌲</span> Pine Tree</span>
+                            <span class="object-item"><span class="object-emoji">🌳</span> Oak Tree</span>
+                            <span class="object-item"><span class="object-emoji">🦥</span> Sloth</span>
+                            <span class="object-item"><span class="object-emoji">🦜</span> Parrot</span>
+                            <span class="object-item"><span class="object-emoji">🦕</span> Brontosaurus</span>
+                            <span class="object-item"><span class="object-emoji">🐦‍🔥</span> Phoenix</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-fall">Fall</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🍂</span> Fallen Leaf</span>
+                            <span class="object-item"><span class="object-emoji">🌰</span> Chestnut</span>
+                            <span class="object-item"><span class="object-emoji">🦔</span> Hedgehog</span>
+                            <span class="object-item"><span class="object-emoji">🪵</span> Log</span>
+                            <span class="object-item"><span class="object-emoji">🦝</span> Raccoon</span>
+                            <span class="object-item"><span class="object-emoji">🦡</span> Badger</span>
+                            <span class="object-item"><span class="object-emoji">🎃</span> Pumpkin</span>
+                            <span class="object-item"><span class="object-emoji">🦌</span> Deer</span>
+                            <span class="object-item"><span class="object-emoji">🌲</span> Pine Tree</span>
+                            <span class="object-item"><span class="object-emoji">🌳</span> Oak Tree</span>
+                            <span class="object-item"><span class="object-emoji">👻</span> Ghost</span>
+                            <span class="object-item"><span class="object-emoji">🧙</span> Wizard</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-winter">Winter</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">❄️</span> Snowflake</span>
+                            <span class="object-item"><span class="object-emoji">🪵</span> Log</span>
+                            <span class="object-item"><span class="object-emoji">🐺</span> Wolf</span>
+                            <span class="object-item"><span class="object-emoji">🦌</span> Deer</span>
+                            <span class="object-item"><span class="object-emoji">🎄</span> Christmas Tree</span>
+                            <span class="object-item"><span class="object-emoji">🧌</span> Yeti</span>
+                            <span class="object-item"><span class="object-emoji">🌲</span> Pine Tree</span>
+                        </div>
+                    </div>
+                    <div class="boundaries-section">
+                        <div class="boundaries-title">Large Objects (rollable at size &ge;64+)</div>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🌲</span> Pine Tree</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🌳</span> Oak Tree</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🏕️</span> Campground</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🦕</span> Brontosaurus</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🐦‍🔥</span> Phoenix</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🧌</span> Yeti</span>
+                    </div>
+                    <div class="biome-stats">
+                        <span>Density: Medium</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Wetland -->
+            <article class="biome-card">
+                <div class="biome-header" style="background: linear-gradient(135deg, rgb(115, 175, 155), rgb(95, 140, 120));">
+                    <h3>Wetland</h3>
+                    <p>Marshy areas with ponds and streams. Frogs croak among the reeds and waterfowl glide across the surface.</p>
+                    <span class="location-badge">Northwest & West</span>
+                </div>
+                <div class="terrain-colors">
+                    <div class="terrain-color" style="background: rgb(115, 175, 155);" title="Spring"></div>
+                    <div class="terrain-color" style="background: rgb(95, 140, 120);" title="Summer"></div>
+                    <div class="terrain-color" style="background: rgb(140, 145, 135);" title="Fall"></div>
+                    <div class="terrain-color" style="background: rgb(195, 210, 220);" title="Winter"></div>
+                </div>
+                <div class="biome-content">
+                    <div class="season-section">
+                        <div class="season-title season-spring">Spring</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">💧</span> Water Drop</span>
+                            <span class="object-item"><span class="object-emoji">🦟</span> Mosquito</span>
+                            <span class="object-item"><span class="object-emoji">🌱</span> Seedling</span>
+                            <span class="object-item"><span class="object-emoji">🐸</span> Frog</span>
+                            <span class="object-item"><span class="object-emoji">🐢</span> Turtle</span>
+                            <span class="object-item"><span class="object-emoji">🦆</span> Duck</span>
+                            <span class="object-item"><span class="object-emoji">🦢</span> Swan</span>
+                            <span class="object-item"><span class="object-emoji">🦫</span> Beaver</span>
+                            <span class="object-item"><span class="object-emoji">🛶</span> Canoe</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-summer">Summer</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🦟</span> Mosquito</span>
+                            <span class="object-item"><span class="object-emoji">🐟</span> Fish</span>
+                            <span class="object-item"><span class="object-emoji">🐸</span> Frog</span>
+                            <span class="object-item"><span class="object-emoji">🪷</span> Lotus</span>
+                            <span class="object-item"><span class="object-emoji">🐢</span> Turtle</span>
+                            <span class="object-item"><span class="object-emoji">🦆</span> Duck</span>
+                            <span class="object-item"><span class="object-emoji">🦢</span> Swan</span>
+                            <span class="object-item"><span class="object-emoji">🦫</span> Beaver</span>
+                            <span class="object-item"><span class="object-emoji">🦩</span> Flamingo</span>
+                            <span class="object-item"><span class="object-emoji">🐊</span> Crocodile</span>
+                            <span class="object-item"><span class="object-emoji">🦛</span> Hippopotamus</span>
+                            <span class="object-item"><span class="object-emoji">🛶</span> Canoe</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-fall">Fall</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🍂</span> Fallen Leaf</span>
+                            <span class="object-item"><span class="object-emoji">🌰</span> Chestnut</span>
+                            <span class="object-item"><span class="object-emoji">🐸</span> Frog</span>
+                            <span class="object-item"><span class="object-emoji">🦆</span> Duck</span>
+                            <span class="object-item"><span class="object-emoji">🦫</span> Beaver</span>
+                            <span class="object-item"><span class="object-emoji">🛶</span> Canoe</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-winter">Winter</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">❄️</span> Snowflake</span>
+                            <span class="object-item"><span class="object-emoji">🧊</span> Ice Block</span>
+                            <span class="object-item"><span class="object-emoji">🦫</span> Beaver</span>
+                        </div>
+                    </div>
+                    <div class="boundaries-section">
+                        <div class="boundaries-title">Large Objects (rollable at size &ge;72+)</div>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🦛</span> Hippopotamus</span>
+                    </div>
+                    <div class="biome-stats">
+                        <span>Density: Medium</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Beach -->
+            <article class="biome-card">
+                <div class="biome-header" style="background: linear-gradient(135deg, rgb(215, 205, 165), rgb(245, 230, 175));">
+                    <h3>Beach</h3>
+                    <p>Sandy shores where the land meets water. Collect shells and watch crabs scuttle across the warm sand.</p>
+                    <span class="location-badge">Southwest</span>
+                </div>
+                <div class="terrain-colors">
+                    <div class="terrain-color" style="background: rgb(215, 205, 165);" title="Spring"></div>
+                    <div class="terrain-color" style="background: rgb(245, 230, 175);" title="Summer"></div>
+                    <div class="terrain-color" style="background: rgb(210, 195, 155);" title="Fall"></div>
+                    <div class="terrain-color" style="background: rgb(230, 235, 240);" title="Winter"></div>
+                </div>
+                <div class="biome-content">
+                    <div class="season-section">
+                        <div class="season-title season-spring">Spring</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">💧</span> Water Drop</span>
+                            <span class="object-item"><span class="object-emoji">🐚</span> Seashell</span>
+                            <span class="object-item"><span class="object-emoji">🦀</span> Crab</span>
+                            <span class="object-item"><span class="object-emoji">🐢</span> Turtle</span>
+                            <span class="object-item"><span class="object-emoji">🪣</span> Beach Bucket</span>
+                            <span class="object-item"><span class="object-emoji">🛖</span> Beach Hut</span>
+                            <span class="object-item"><span class="object-emoji">🌴</span> Palm Tree</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-summer">Summer</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🧂</span> Salt Crystal</span>
+                            <span class="object-item"><span class="object-emoji">🐚</span> Seashell</span>
+                            <span class="object-item"><span class="object-emoji">🍦</span> Ice Cream</span>
+                            <span class="object-item"><span class="object-emoji">🦀</span> Crab</span>
+                            <span class="object-item"><span class="object-emoji">🐢</span> Turtle</span>
+                            <span class="object-item"><span class="object-emoji">🏐</span> Beach Ball</span>
+                            <span class="object-item"><span class="object-emoji">🪣</span> Beach Bucket</span>
+                            <span class="object-item"><span class="object-emoji">🧳</span> Suitcase</span>
+                            <span class="object-item"><span class="object-emoji">🦩</span> Flamingo</span>
+                            <span class="object-item"><span class="object-emoji">🎸</span> Guitar</span>
+                            <span class="object-item"><span class="object-emoji">⛱️</span> Beach Umbrella</span>
+                            <span class="object-item"><span class="object-emoji">🌴</span> Palm Tree</span>
+                            <span class="object-item"><span class="object-emoji">🎪</span> Beach Tent</span>
+                            <span class="object-item"><span class="object-emoji">🛖</span> Beach Hut</span>
+                            <span class="object-item"><span class="object-emoji">🐪</span> Camel</span>
+                            <span class="object-item"><span class="object-emoji">🛶</span> Canoe</span>
+                            <span class="object-item"><span class="object-emoji">🗿</span> Moai</span>
+                            <span class="object-item"><span class="object-emoji">🏄</span> Surfer</span>
+                            <span class="object-item"><span class="object-emoji">🧜</span> Mermaid</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-fall">Fall</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🍂</span> Fallen Leaf</span>
+                            <span class="object-item"><span class="object-emoji">🐚</span> Seashell</span>
+                            <span class="object-item"><span class="object-emoji">🦀</span> Crab</span>
+                            <span class="object-item"><span class="object-emoji">🪣</span> Beach Bucket</span>
+                            <span class="object-item"><span class="object-emoji">🌴</span> Palm Tree</span>
+                            <span class="object-item"><span class="object-emoji">🛖</span> Beach Hut</span>
+                            <span class="object-item"><span class="object-emoji">🗿</span> Moai</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-winter">Winter</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">❄️</span> Snowflake</span>
+                            <span class="object-item"><span class="object-emoji">🐚</span> Seashell</span>
+                            <span class="object-item"><span class="object-emoji">🦭</span> Seal</span>
+                            <span class="object-item"><span class="object-emoji">🐧</span> Penguin</span>
+                            <span class="object-item"><span class="object-emoji">🐻‍❄️</span> Polar Bear</span>
+                        </div>
+                    </div>
+                    <div class="boundaries-section">
+                        <div class="boundaries-title">Large Objects (rollable at size &ge;64+)</div>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🐪</span> Camel</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🗿</span> Moai</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🐻‍❄️</span> Polar Bear</span>
+                    </div>
+                    <div class="biome-stats">
+                        <span>Density: Medium</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Farmland -->
+            <article class="biome-card">
+                <div class="biome-header" style="background: linear-gradient(135deg, rgb(155, 180, 120), rgb(170, 165, 90));">
+                    <h3>Farmland</h3>
+                    <p>Cultivated fields and gardens with crops arranged in neat rows. Farm animals roam freely between patches.</p>
+                    <span class="location-badge">Southeast</span>
+                </div>
+                <div class="terrain-colors">
+                    <div class="terrain-color" style="background: rgb(155, 180, 120);" title="Spring"></div>
+                    <div class="terrain-color" style="background: rgb(170, 165, 90);" title="Summer"></div>
+                    <div class="terrain-color" style="background: rgb(180, 155, 110);" title="Fall"></div>
+                    <div class="terrain-color" style="background: rgb(220, 225, 230);" title="Winter"></div>
+                </div>
+                <div class="biome-content">
+                    <div class="season-section">
+                        <div class="season-title season-spring">Spring</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🌱</span> Seedling</span>
+                            <span class="object-item"><span class="object-emoji">🐣</span> Hatching Chick</span>
+                            <span class="object-item"><span class="object-emoji">🥚</span> Egg</span>
+                            <span class="object-item"><span class="object-emoji">🥕</span> Carrot</span>
+                            <span class="object-item"><span class="object-emoji">🥬</span> Lettuce</span>
+                            <span class="object-item"><span class="object-emoji">🐤</span> Baby Chick</span>
+                            <span class="object-item"><span class="object-emoji">🐰</span> Rabbit</span>
+                            <span class="object-item"><span class="object-emoji">📦</span> Cardboard Box</span>
+                            <span class="object-item"><span class="object-emoji">🧺</span> Basket</span>
+                            <span class="object-item"><span class="object-emoji">🐖</span> Pig</span>
+                            <span class="object-item"><span class="object-emoji">🐑</span> Sheep</span>
+                            <span class="object-item"><span class="object-emoji">🐄</span> Cow</span>
+                            <span class="object-item"><span class="object-emoji">🐎</span> Horse</span>
+                            <span class="object-item"><span class="object-emoji">🏚️</span> Shed</span>
+                            <span class="object-item"><span class="object-emoji">🏠</span> House</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-summer">Summer</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🫘</span> Beans</span>
+                            <span class="object-item"><span class="object-emoji">🍅</span> Tomato</span>
+                            <span class="object-item"><span class="object-emoji">🥒</span> Cucumber</span>
+                            <span class="object-item"><span class="object-emoji">🍓</span> Strawberry</span>
+                            <span class="object-item"><span class="object-emoji">🐔</span> Chicken</span>
+                            <span class="object-item"><span class="object-emoji">🌽</span> Corn</span>
+                            <span class="object-item"><span class="object-emoji">🌻</span> Sunflower</span>
+                            <span class="object-item"><span class="object-emoji">🍉</span> Watermelon</span>
+                            <span class="object-item"><span class="object-emoji">🐖</span> Pig</span>
+                            <span class="object-item"><span class="object-emoji">🐑</span> Sheep</span>
+                            <span class="object-item"><span class="object-emoji">🐄</span> Cow</span>
+                            <span class="object-item"><span class="object-emoji">🐎</span> Horse</span>
+                            <span class="object-item"><span class="object-emoji">🚜</span> Tractor</span>
+                            <span class="object-item"><span class="object-emoji">🏚️</span> Shed</span>
+                            <span class="object-item"><span class="object-emoji">🏠</span> House</span>
+                            <span class="object-item"><span class="object-emoji">🛸</span> UFO</span>
+                            <span class="object-item"><span class="object-emoji">👽</span> Alien</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-fall">Fall</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🌰</span> Chestnut</span>
+                            <span class="object-item"><span class="object-emoji">🍎</span> Apple</span>
+                            <span class="object-item"><span class="object-emoji">🧅</span> Onion</span>
+                            <span class="object-item"><span class="object-emoji">🥔</span> Potato</span>
+                            <span class="object-item"><span class="object-emoji">🌽</span> Corn</span>
+                            <span class="object-item"><span class="object-emoji">🧺</span> Basket</span>
+                            <span class="object-item"><span class="object-emoji">🦃</span> Turkey</span>
+                            <span class="object-item"><span class="object-emoji">🎃</span> Pumpkin</span>
+                            <span class="object-item"><span class="object-emoji">🐖</span> Pig</span>
+                            <span class="object-item"><span class="object-emoji">🌾</span> Hay Bale</span>
+                            <span class="object-item"><span class="object-emoji">🐄</span> Cow</span>
+                            <span class="object-item"><span class="object-emoji">🐎</span> Horse</span>
+                            <span class="object-item"><span class="object-emoji">🚜</span> Tractor</span>
+                            <span class="object-item"><span class="object-emoji">🏚️</span> Shed</span>
+                            <span class="object-item"><span class="object-emoji">🏠</span> House</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-winter">Winter</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">❄️</span> Snowflake</span>
+                            <span class="object-item"><span class="object-emoji">🎁</span> Gift Box</span>
+                            <span class="object-item"><span class="object-emoji">⛄</span> Snowman</span>
+                            <span class="object-item"><span class="object-emoji">🐄</span> Cow</span>
+                            <span class="object-item"><span class="object-emoji">🐎</span> Horse</span>
+                            <span class="object-item"><span class="object-emoji">🏚️</span> Shed</span>
+                            <span class="object-item"><span class="object-emoji">🏠</span> House</span>
+                        </div>
+                    </div>
+                    <div class="boundaries-section">
+                        <div class="boundaries-title">Large Objects (rollable at size &ge;64+)</div>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🐎</span> Horse</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🏚️</span> Shed</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🏠</span> House</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🚜</span> Tractor</span>
+                    </div>
+                    <div class="biome-stats">
+                        <span>Density: High</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Village -->
+            <article class="biome-card">
+                <div class="biome-header" style="background: linear-gradient(135deg, rgb(175, 185, 150), rgb(190, 175, 135));">
+                    <h3>Village</h3>
+                    <p>A cozy settlement with homes and gathering places. Seasonal decorations adorn the buildings.</p>
+                    <span class="location-badge">Within Farmland</span>
+                </div>
+                <div class="terrain-colors">
+                    <div class="terrain-color" style="background: rgb(175, 185, 150);" title="Spring"></div>
+                    <div class="terrain-color" style="background: rgb(190, 175, 135);" title="Summer"></div>
+                    <div class="terrain-color" style="background: rgb(180, 160, 135);" title="Fall"></div>
+                    <div class="terrain-color" style="background: rgb(225, 225, 230);" title="Winter"></div>
+                </div>
+                <div class="biome-content">
+                    <div class="season-section">
+                        <div class="season-title season-spring">Spring</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🌸</span> Cherry Blossom</span>
+                            <span class="object-item"><span class="object-emoji">🌷</span> Tulip</span>
+                            <span class="object-item"><span class="object-emoji">🪻</span> Hyacinth</span>
+                            <span class="object-item"><span class="object-emoji">🐦</span> Bird</span>
+                            <span class="object-item"><span class="object-emoji">📦</span> Cardboard Box</span>
+                            <span class="object-item"><span class="object-emoji">🐕</span> Dog</span>
+                            <span class="object-item"><span class="object-emoji">🐈</span> Cat</span>
+                            <span class="object-item"><span class="object-emoji">🪴</span> Potted Plant</span>
+                            <span class="object-item"><span class="object-emoji">📮</span> Mailbox</span>
+                            <span class="object-item"><span class="object-emoji">☂️</span> Umbrella</span>
+                            <span class="object-item"><span class="object-emoji">🚲</span> Bicycle</span>
+                            <span class="object-item"><span class="object-emoji">⛲</span> Fountain</span>
+                            <span class="object-item"><span class="object-emoji">🏠</span> House</span>
+                            <span class="object-item"><span class="object-emoji">🏪</span> Shop</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-summer">Summer</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🌼</span> Daisy</span>
+                            <span class="object-item"><span class="object-emoji">🌹</span> Rose</span>
+                            <span class="object-item"><span class="object-emoji">🐕</span> Dog</span>
+                            <span class="object-item"><span class="object-emoji">🐈</span> Cat</span>
+                            <span class="object-item"><span class="object-emoji">📮</span> Mailbox</span>
+                            <span class="object-item"><span class="object-emoji">🪑</span> Chair</span>
+                            <span class="object-item"><span class="object-emoji">🗑️</span> Trash Can</span>
+                            <span class="object-item"><span class="object-emoji">🚲</span> Bicycle</span>
+                            <span class="object-item"><span class="object-emoji">🛵</span> Scooter</span>
+                            <span class="object-item"><span class="object-emoji">🏀</span> Basketball</span>
+                            <span class="object-item"><span class="object-emoji">🚗</span> Car</span>
+                            <span class="object-item"><span class="object-emoji">⛲</span> Fountain</span>
+                            <span class="object-item"><span class="object-emoji">🏠</span> House</span>
+                            <span class="object-item"><span class="object-emoji">🏪</span> Shop</span>
+                            <span class="object-item"><span class="object-emoji">🚐</span> Van</span>
+                            <span class="object-item"><span class="object-emoji">🚌</span> Bus</span>
+                            <span class="object-item"><span class="object-emoji">🎡</span> Ferris Wheel</span>
+                            <span class="object-item"><span class="object-emoji">🎠</span> Carousel</span>
+                            <span class="object-item"><span class="object-emoji">🤖</span> Robot</span>
+                            <span class="object-item"><span class="object-emoji">🗽</span> Statue of Liberty</span>
+                            <span class="object-item"><span class="object-emoji">🤡</span> Clown</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-fall">Fall</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🍂</span> Fallen Leaf</span>
+                            <span class="object-item"><span class="object-emoji">🧹</span> Broom</span>
+                            <span class="object-item"><span class="object-emoji">🎃</span> Pumpkin</span>
+                            <span class="object-item"><span class="object-emoji">🐕</span> Dog</span>
+                            <span class="object-item"><span class="object-emoji">🐈</span> Cat</span>
+                            <span class="object-item"><span class="object-emoji">📮</span> Mailbox</span>
+                            <span class="object-item"><span class="object-emoji">🪑</span> Chair</span>
+                            <span class="object-item"><span class="object-emoji">☂️</span> Umbrella</span>
+                            <span class="object-item"><span class="object-emoji">🚗</span> Car</span>
+                            <span class="object-item"><span class="object-emoji">🏠</span> House</span>
+                            <span class="object-item"><span class="object-emoji">🏪</span> Shop</span>
+                            <span class="object-item"><span class="object-emoji">🚐</span> Van</span>
+                            <span class="object-item"><span class="object-emoji">👑</span> Crown</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-winter">Winter</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">❄️</span> Snowflake</span>
+                            <span class="object-item"><span class="object-emoji">🎁</span> Gift Box</span>
+                            <span class="object-item"><span class="object-emoji">🪆</span> Nesting Doll</span>
+                            <span class="object-item"><span class="object-emoji">🐕</span> Dog</span>
+                            <span class="object-item"><span class="object-emoji">🐈</span> Cat</span>
+                            <span class="object-item"><span class="object-emoji">⛄</span> Snowman</span>
+                            <span class="object-item"><span class="object-emoji">🎄</span> Christmas Tree</span>
+                            <span class="object-item"><span class="object-emoji">🚗</span> Car</span>
+                            <span class="object-item"><span class="object-emoji">🏠</span> House</span>
+                            <span class="object-item"><span class="object-emoji">🏪</span> Shop</span>
+                            <span class="object-item"><span class="object-emoji">🚌</span> Bus</span>
+                        </div>
+                    </div>
+                    <div class="boundaries-section">
+                        <div class="boundaries-title">Large Objects (rollable at size &ge;64+)</div>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">⛲</span> Fountain</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🏠</span> House</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🏪</span> Shop</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🚐</span> Van</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🚌</span> Bus</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🎡</span> Ferris Wheel</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🎠</span> Carousel</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🗽</span> Statue of Liberty</span>
+                    </div>
+                    <div class="biome-stats">
+                        <span>Density: Medium</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Orchard -->
+            <article class="biome-card">
+                <div class="biome-header" style="background: linear-gradient(135deg, rgb(140, 190, 125), rgb(120, 155, 85));">
+                    <h3>Orchard</h3>
+                    <p>Rows of fruit trees in organized groves. Blossoms in spring give way to ripe fruit in fall.</p>
+                    <span class="location-badge">East</span>
+                </div>
+                <div class="terrain-colors">
+                    <div class="terrain-color" style="background: rgb(140, 190, 125);" title="Spring"></div>
+                    <div class="terrain-color" style="background: rgb(120, 155, 85);" title="Summer"></div>
+                    <div class="terrain-color" style="background: rgb(165, 145, 105);" title="Fall"></div>
+                    <div class="terrain-color" style="background: rgb(210, 215, 220);" title="Winter"></div>
+                </div>
+                <div class="biome-content">
+                    <div class="season-section">
+                        <div class="season-title season-spring">Spring</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🐝</span> Bee</span>
+                            <span class="object-item"><span class="object-emoji">🌸</span> Cherry Blossom</span>
+                            <span class="object-item"><span class="object-emoji">🪺</span> Bird Nest</span>
+                            <span class="object-item"><span class="object-emoji">🐦</span> Bird</span>
+                            <span class="object-item"><span class="object-emoji">🧺</span> Basket</span>
+                            <span class="object-item"><span class="object-emoji">🌳</span> Oak Tree</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-summer">Summer</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🍎</span> Apple</span>
+                            <span class="object-item"><span class="object-emoji">🍐</span> Pear</span>
+                            <span class="object-item"><span class="object-emoji">🍑</span> Peach</span>
+                            <span class="object-item"><span class="object-emoji">🍊</span> Orange</span>
+                            <span class="object-item"><span class="object-emoji">🍋</span> Lemon</span>
+                            <span class="object-item"><span class="object-emoji">🐦</span> Bird</span>
+                            <span class="object-item"><span class="object-emoji">🧺</span> Basket</span>
+                            <span class="object-item"><span class="object-emoji">🌳</span> Oak Tree</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-fall">Fall</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🍂</span> Fallen Leaf</span>
+                            <span class="object-item"><span class="object-emoji">🍎</span> Apple</span>
+                            <span class="object-item"><span class="object-emoji">🍐</span> Pear</span>
+                            <span class="object-item"><span class="object-emoji">🍇</span> Grapes</span>
+                            <span class="object-item"><span class="object-emoji">🧺</span> Basket</span>
+                            <span class="object-item"><span class="object-emoji">🌳</span> Oak Tree</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-winter">Winter</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">❄️</span> Snowflake</span>
+                            <span class="object-item"><span class="object-emoji">🌳</span> Oak Tree</span>
+                        </div>
+                    </div>
+                    <div class="boundaries-section">
+                        <div class="boundaries-title">Large Objects (rollable at size &ge;80+)</div>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🌳</span> Oak Tree</span>
+                    </div>
+                    <div class="biome-stats">
+                        <span>Density: Medium</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Hills -->
+            <article class="biome-card">
+                <div class="biome-header" style="background: linear-gradient(135deg, rgb(150, 175, 135), rgb(165, 165, 115));">
+                    <h3>Hills</h3>
+                    <p>Rocky elevated terrain with sparse vegetation. Large boulders dot the landscape.</p>
+                    <span class="location-badge">South</span>
+                </div>
+                <div class="terrain-colors">
+                    <div class="terrain-color" style="background: rgb(150, 175, 135);" title="Spring"></div>
+                    <div class="terrain-color" style="background: rgb(165, 165, 115);" title="Summer"></div>
+                    <div class="terrain-color" style="background: rgb(165, 150, 125);" title="Fall"></div>
+                    <div class="terrain-color" style="background: rgb(215, 220, 225);" title="Winter"></div>
+                </div>
+                <div class="biome-content">
+                    <div class="season-section">
+                        <div class="season-title season-spring">Spring</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🌼</span> Daisy</span>
+                            <span class="object-item"><span class="object-emoji">🦋</span> Butterfly</span>
+                            <span class="object-item"><span class="object-emoji">🐐</span> Goat</span>
+                            <span class="object-item"><span class="object-emoji">🪨</span> Rock</span>
+                            <span class="object-item"><span class="object-emoji">🪨</span> Rock</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-summer">Summer</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🦎</span> Lizard</span>
+                            <span class="object-item"><span class="object-emoji">🐍</span> Snake</span>
+                            <span class="object-item"><span class="object-emoji">🌵</span> Cactus</span>
+                            <span class="object-item"><span class="object-emoji">🐐</span> Goat</span>
+                            <span class="object-item"><span class="object-emoji">🦏</span> Rhinoceros</span>
+                            <span class="object-item"><span class="object-emoji">🪨</span> Rock</span>
+                            <span class="object-item"><span class="object-emoji">🪨</span> Rock</span>
+                            <span class="object-item"><span class="object-emoji">🌋</span> Volcano</span>
+                            <span class="object-item"><span class="object-emoji">🦖</span> T-Rex</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-fall">Fall</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">🍂</span> Fallen Leaf</span>
+                            <span class="object-item"><span class="object-emoji">🐐</span> Goat</span>
+                            <span class="object-item"><span class="object-emoji">🦬</span> Bison</span>
+                            <span class="object-item"><span class="object-emoji">🪨</span> Rock</span>
+                            <span class="object-item"><span class="object-emoji">🪨</span> Rock</span>
+                            <span class="object-item"><span class="object-emoji">🏰</span> Castle</span>
+                            <span class="object-item"><span class="object-emoji">🐉</span> Dragon</span>
+                            <span class="object-item"><span class="object-emoji">💎</span> Diamond</span>
+                        </div>
+                    </div>
+                    <div class="season-section">
+                        <div class="season-title season-winter">Winter</div>
+                        <div class="objects-list">
+                            <span class="object-item"><span class="object-emoji">❄️</span> Snowflake</span>
+                            <span class="object-item"><span class="object-emoji">🐐</span> Goat</span>
+                            <span class="object-item"><span class="object-emoji">🦣</span> Mammoth</span>
+                            <span class="object-item"><span class="object-emoji">🪨</span> Rock</span>
+                            <span class="object-item"><span class="object-emoji">🪨</span> Rock</span>
+                            <span class="object-item"><span class="object-emoji">🏔️</span> Snow Mountain</span>
+                            <span class="object-item"><span class="object-emoji">🏰</span> Castle</span>
+                            <span class="object-item"><span class="object-emoji">💎</span> Diamond</span>
+                        </div>
+                    </div>
+                    <div class="boundaries-section">
+                        <div class="boundaries-title">Large Objects (rollable at size &ge;72+)</div>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🦏</span> Rhinoceros</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🌋</span> Volcano</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🦖</span> T-Rex</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🦬</span> Bison</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🏰</span> Castle</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🐉</span> Dragon</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🦣</span> Mammoth</span>
+                        <span class="boundary-item" style="background: #e0f0e0;"><span class="object-emoji">🏔️</span> Snow Mountain</span>
+                    </div>
+                    <div class="biome-stats">
+                        <span>Density: Low</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Complete Objects Reference -->
+        <section class="objects-reference" id="objects">
+            <h2>Complete Object Reference</h2>
+            <p>All 175 collectible objects with their spawn sizes, biomes, seasons, and player size requirements. Objects can be collected when player is at least 125% of the object's size.</p>
+
+            <table class="objects-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Object</th>
+                        <th>Size Range</th>
+                        <th>Player Size</th>
+                        <th>Biomes</th>
+                        <th>Seasons</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td class="emoji-cell">🐜</td>
+                        <td class="name-cell">Ant</td>
+                        <td class="size-cell">3-6px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;40</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐛</td>
+                        <td class="name-cell">Caterpillar</td>
+                        <td class="size-cell">3-8px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;40</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">💧</td>
+                        <td class="name-cell">Water Drop</td>
+                        <td class="size-cell">3-8px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;50</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-wetland">Wetland</span><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦟</td>
+                        <td class="name-cell">Mosquito</td>
+                        <td class="size-cell">3-5px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;30</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-wetland">Wetland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐝</td>
+                        <td class="name-cell">Bee</td>
+                        <td class="size-cell">4-8px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;50</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-orchard">Orchard</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐞</td>
+                        <td class="name-cell">Ladybug</td>
+                        <td class="size-cell">4-8px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;50</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🫘</td>
+                        <td class="name-cell">Beans</td>
+                        <td class="size-cell">4-8px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;50</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍀</td>
+                        <td class="name-cell">Clover</td>
+                        <td class="size-cell">5-10px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;60</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦗</td>
+                        <td class="name-cell">Cricket</td>
+                        <td class="size-cell">5-10px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;60</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🪲</td>
+                        <td class="name-cell">Beetle</td>
+                        <td class="size-cell">5-10px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;60</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌱</td>
+                        <td class="name-cell">Seedling</td>
+                        <td class="size-cell">5-10px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;60</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-wetland">Wetland</span><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🧂</td>
+                        <td class="name-cell">Salt Crystal</td>
+                        <td class="size-cell">5-10px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;60</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐚</td>
+                        <td class="name-cell">Seashell</td>
+                        <td class="size-cell">6-14px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;100</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦐</td>
+                        <td class="name-cell">Shrimp</td>
+                        <td class="size-cell">6-12px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;80</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌸</td>
+                        <td class="name-cell">Cherry Blossom</td>
+                        <td class="size-cell">6-12px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;80</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-village">Village</span><span class="biome-tag tag-orchard">Orchard</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍂</td>
+                        <td class="name-cell">Fallen Leaf</td>
+                        <td class="size-cell">6-12px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;80</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-forest">Forest</span><span class="biome-tag tag-wetland">Wetland</span><span class="biome-tag tag-beach">Beach</span><span class="biome-tag tag-village">Village</span><span class="biome-tag tag-orchard">Orchard</span><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">❄️</td>
+                        <td class="name-cell">Snowflake</td>
+                        <td class="size-cell">6-16px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;120</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-forest">Forest</span><span class="biome-tag tag-wetland">Wetland</span><span class="biome-tag tag-beach">Beach</span><span class="biome-tag tag-farmland">Farmland</span><span class="biome-tag tag-village">Village</span><span class="biome-tag tag-orchard">Orchard</span><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🫐</td>
+                        <td class="name-cell">Blueberries</td>
+                        <td class="size-cell">6-12px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;80</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌰</td>
+                        <td class="name-cell">Chestnut</td>
+                        <td class="size-cell">6-12px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;80</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span><span class="biome-tag tag-wetland">Wetland</span><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐣</td>
+                        <td class="name-cell">Hatching Chick</td>
+                        <td class="size-cell">6-12px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;80</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🥚</td>
+                        <td class="name-cell">Egg</td>
+                        <td class="size-cell">6-12px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;80</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🪸</td>
+                        <td class="name-cell">Coral</td>
+                        <td class="size-cell">8-14px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌷</td>
+                        <td class="name-cell">Tulip</td>
+                        <td class="size-cell">8-16px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;100</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦋</td>
+                        <td class="name-cell">Butterfly</td>
+                        <td class="size-cell">8-14px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;90</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌼</td>
+                        <td class="name-cell">Daisy</td>
+                        <td class="size-cell">8-20px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;100</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-village">Village</span><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍁</td>
+                        <td class="name-cell">Maple Leaf</td>
+                        <td class="size-cell">8-16px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;100</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🪺</td>
+                        <td class="name-cell">Bird Nest</td>
+                        <td class="size-cell">8-14px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;100</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span><span class="biome-tag tag-orchard">Orchard</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦎</td>
+                        <td class="name-cell">Lizard</td>
+                        <td class="size-cell">8-16px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;120</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🥕</td>
+                        <td class="name-cell">Carrot</td>
+                        <td class="size-cell">8-16px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;120</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍅</td>
+                        <td class="name-cell">Tomato</td>
+                        <td class="size-cell">8-16px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;120</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍓</td>
+                        <td class="name-cell">Strawberry</td>
+                        <td class="size-cell">8-16px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;120</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍎</td>
+                        <td class="name-cell">Apple</td>
+                        <td class="size-cell">8-22px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;120</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span><span class="biome-tag tag-orchard">Orchard</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍐</td>
+                        <td class="name-cell">Pear</td>
+                        <td class="size-cell">8-22px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;120</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-orchard">Orchard</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍑</td>
+                        <td class="name-cell">Peach</td>
+                        <td class="size-cell">8-16px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;120</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-orchard">Orchard</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍋</td>
+                        <td class="name-cell">Lemon</td>
+                        <td class="size-cell">8-18px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-orchard">Orchard</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐟</td>
+                        <td class="name-cell">Fish</td>
+                        <td class="size-cell">10-30px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;150</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span><span class="biome-tag tag-wetland">Wetland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍄</td>
+                        <td class="name-cell">Mushroom</td>
+                        <td class="size-cell">10-30px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍦</td>
+                        <td class="name-cell">Ice Cream</td>
+                        <td class="size-cell">10-20px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;130</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐤</td>
+                        <td class="name-cell">Baby Chick</td>
+                        <td class="size-cell">10-18px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;120</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🥒</td>
+                        <td class="name-cell">Cucumber</td>
+                        <td class="size-cell">10-22px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🧅</td>
+                        <td class="name-cell">Onion</td>
+                        <td class="size-cell">10-20px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🥔</td>
+                        <td class="name-cell">Potato</td>
+                        <td class="size-cell">10-22px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍊</td>
+                        <td class="name-cell">Orange</td>
+                        <td class="size-cell">10-22px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-orchard">Orchard</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦀</td>
+                        <td class="name-cell">Crab</td>
+                        <td class="size-cell">12-40px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;180</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐿️</td>
+                        <td class="name-cell">Squirrel</td>
+                        <td class="size-cell">12-26px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;180</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐸</td>
+                        <td class="name-cell">Frog</td>
+                        <td class="size-cell">12-28px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;180</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-wetland">Wetland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🥬</td>
+                        <td class="name-cell">Lettuce</td>
+                        <td class="size-cell">12-24px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🪻</td>
+                        <td class="name-cell">Hyacinth</td>
+                        <td class="size-cell">12-24px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌹</td>
+                        <td class="name-cell">Rose</td>
+                        <td class="size-cell">12-25px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍇</td>
+                        <td class="name-cell">Grapes</td>
+                        <td class="size-cell">12-28px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-orchard">Orchard</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐔</td>
+                        <td class="name-cell">Chicken</td>
+                        <td class="size-cell">14-28px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;200</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🪼</td>
+                        <td class="name-cell">Jellyfish</td>
+                        <td class="size-cell">15-35px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐦</td>
+                        <td class="name-cell">Bird</td>
+                        <td class="size-cell">15-28px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;180</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-forest">Forest</span><span class="biome-tag tag-village">Village</span><span class="biome-tag tag-orchard">Orchard</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌺</td>
+                        <td class="name-cell">Hibiscus</td>
+                        <td class="size-cell">15-30px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐍</td>
+                        <td class="name-cell">Snake</td>
+                        <td class="size-cell">15-35px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🪷</td>
+                        <td class="name-cell">Lotus</td>
+                        <td class="size-cell">15-30px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-wetland">Wetland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌽</td>
+                        <td class="name-cell">Corn</td>
+                        <td class="size-cell">15-30px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🎁</td>
+                        <td class="name-cell">Gift Box</td>
+                        <td class="size-cell">15-35px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">💎</td>
+                        <td class="name-cell">Diamond</td>
+                        <td class="size-cell">15-35px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦔</td>
+                        <td class="name-cell">Hedgehog</td>
+                        <td class="size-cell">16-28px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;200</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦜</td>
+                        <td class="name-cell">Parrot</td>
+                        <td class="size-cell">18-35px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🧺</td>
+                        <td class="name-cell">Basket</td>
+                        <td class="size-cell">18-32px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span><span class="biome-tag tag-orchard">Orchard</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐢</td>
+                        <td class="name-cell">Turtle</td>
+                        <td class="size-cell">20-55px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;250</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span><span class="biome-tag tag-wetland">Wetland</span><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦞</td>
+                        <td class="name-cell">Lobster</td>
+                        <td class="size-cell">20-35px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🧊</td>
+                        <td class="name-cell">Ice Block</td>
+                        <td class="size-cell">20-50px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span><span class="biome-tag tag-wetland">Wetland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐰</td>
+                        <td class="name-cell">Rabbit</td>
+                        <td class="size-cell">20-40px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;250</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌾</td>
+                        <td class="name-cell">Wheat</td>
+                        <td class="size-cell">20-40px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🪵</td>
+                        <td class="name-cell">Log</td>
+                        <td class="size-cell">20-35px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">📦</td>
+                        <td class="name-cell">Cardboard Box</td>
+                        <td class="size-cell">20-35px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">👑</td>
+                        <td class="name-cell">Crown</td>
+                        <td class="size-cell">20-40px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌻</td>
+                        <td class="name-cell">Sunflower</td>
+                        <td class="size-cell">25-55px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦥</td>
+                        <td class="name-cell">Sloth</td>
+                        <td class="size-cell">25-45px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦆</td>
+                        <td class="name-cell">Duck</td>
+                        <td class="size-cell">25-50px</td>
+                        <td class="player-size-cell"><span class="player-max">&le;300</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-wetland">Wetland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">👽</td>
+                        <td class="name-cell">Alien</td>
+                        <td class="size-cell">25-50px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">👻</td>
+                        <td class="name-cell">Ghost</td>
+                        <td class="size-cell">30-60px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🪣</td>
+                        <td class="name-cell">Beach Bucket</td>
+                        <td class="size-cell">30-55px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🏐</td>
+                        <td class="name-cell">Beach Ball</td>
+                        <td class="size-cell">30-55px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🏄</td>
+                        <td class="name-cell">Surfer</td>
+                        <td class="size-cell">30-50px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐈</td>
+                        <td class="name-cell">Cat</td>
+                        <td class="size-cell">30-50px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🪆</td>
+                        <td class="name-cell">Nesting Doll</td>
+                        <td class="size-cell">30-55px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🪨</td>
+                        <td class="name-cell">Rock</td>
+                        <td class="size-cell">30-200px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">⚽</td>
+                        <td class="name-cell">Soccer Ball</td>
+                        <td class="size-cell">35-60px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦝</td>
+                        <td class="name-cell">Raccoon</td>
+                        <td class="size-cell">35-55px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦡</td>
+                        <td class="name-cell">Badger</td>
+                        <td class="size-cell">35-55px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🧙</td>
+                        <td class="name-cell">Wizard</td>
+                        <td class="size-cell">35-60px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🧳</td>
+                        <td class="name-cell">Suitcase</td>
+                        <td class="size-cell">35-60px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🍉</td>
+                        <td class="name-cell">Watermelon</td>
+                        <td class="size-cell">35-70px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦃</td>
+                        <td class="name-cell">Turkey</td>
+                        <td class="size-cell">35-60px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐕</td>
+                        <td class="name-cell">Dog</td>
+                        <td class="size-cell">35-60px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🪴</td>
+                        <td class="name-cell">Potted Plant</td>
+                        <td class="size-cell">35-65px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🏀</td>
+                        <td class="name-cell">Basketball</td>
+                        <td class="size-cell">35-55px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🧹</td>
+                        <td class="name-cell">Broom</td>
+                        <td class="size-cell">35-60px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦑</td>
+                        <td class="name-cell">Squid</td>
+                        <td class="size-cell">40-80px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🧜</td>
+                        <td class="name-cell">Mermaid</td>
+                        <td class="size-cell">40-70px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐧</td>
+                        <td class="name-cell">Penguin</td>
+                        <td class="size-cell">40-70px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐑</td>
+                        <td class="name-cell">Sheep</td>
+                        <td class="size-cell">40-70px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦊</td>
+                        <td class="name-cell">Fox</td>
+                        <td class="size-cell">40-65px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🎃</td>
+                        <td class="name-cell">Pumpkin</td>
+                        <td class="size-cell">40-100px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-forest">Forest</span><span class="biome-tag tag-farmland">Farmland</span><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦢</td>
+                        <td class="name-cell">Swan</td>
+                        <td class="size-cell">40-70px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-wetland">Wetland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦫</td>
+                        <td class="name-cell">Beaver</td>
+                        <td class="size-cell">40-65px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-wetland">Wetland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐖</td>
+                        <td class="name-cell">Pig</td>
+                        <td class="size-cell">40-70px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">📮</td>
+                        <td class="name-cell">Mailbox</td>
+                        <td class="size-cell">40-65px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">☂️</td>
+                        <td class="name-cell">Umbrella</td>
+                        <td class="size-cell">40-70px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🪑</td>
+                        <td class="name-cell">Chair</td>
+                        <td class="size-cell">40-70px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🤡</td>
+                        <td class="name-cell">Clown</td>
+                        <td class="size-cell">40-70px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌵</td>
+                        <td class="name-cell">Cactus</td>
+                        <td class="size-cell">40-80px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐺</td>
+                        <td class="name-cell">Wolf</td>
+                        <td class="size-cell">45-75px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦩</td>
+                        <td class="name-cell">Flamingo</td>
+                        <td class="size-cell">45-80px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-wetland">Wetland</span><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🎸</td>
+                        <td class="name-cell">Guitar</td>
+                        <td class="size-cell">45-70px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🗑️</td>
+                        <td class="name-cell">Trash Can</td>
+                        <td class="size-cell">45-75px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐐</td>
+                        <td class="name-cell">Goat</td>
+                        <td class="size-cell">45-75px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐙</td>
+                        <td class="name-cell">Octopus</td>
+                        <td class="size-cell">50-100px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦭</td>
+                        <td class="name-cell">Seal</td>
+                        <td class="size-cell">50-90px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦌</td>
+                        <td class="name-cell">Deer</td>
+                        <td class="size-cell">50-85px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🎅</td>
+                        <td class="name-cell">Santa Claus</td>
+                        <td class="size-cell">50-90px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐻</td>
+                        <td class="name-cell">Bear</td>
+                        <td class="size-cell">50-80px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🚲</td>
+                        <td class="name-cell">Bicycle</td>
+                        <td class="size-cell">50-80px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🛵</td>
+                        <td class="name-cell">Scooter</td>
+                        <td class="size-cell">50-80px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🤖</td>
+                        <td class="name-cell">Robot</td>
+                        <td class="size-cell">50-100px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐬</td>
+                        <td class="name-cell">Dolphin</td>
+                        <td class="size-cell">55-95px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">⛄</td>
+                        <td class="name-cell">Snowman</td>
+                        <td class="size-cell">55-120px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-farmland">Farmland</span><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">⛺</td>
+                        <td class="name-cell">Tent</td>
+                        <td class="size-cell">55-90px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦈</td>
+                        <td class="name-cell">Shark</td>
+                        <td class="size-cell">60-100px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦄</td>
+                        <td class="name-cell">Unicorn</td>
+                        <td class="size-cell">60-100px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">☄️</td>
+                        <td class="name-cell">Comet</td>
+                        <td class="size-cell">60-120px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐊</td>
+                        <td class="name-cell">Crocodile</td>
+                        <td class="size-cell">60-100px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-wetland">Wetland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌴</td>
+                        <td class="name-cell">Palm Tree</td>
+                        <td class="size-cell">60-100px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">⛱️</td>
+                        <td class="name-cell">Beach Umbrella</td>
+                        <td class="size-cell">60-120px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🎪</td>
+                        <td class="name-cell">Beach Tent</td>
+                        <td class="size-cell">60-100px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🛸</td>
+                        <td class="name-cell">UFO</td>
+                        <td class="size-cell">60-120px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🚗</td>
+                        <td class="name-cell">Car</td>
+                        <td class="size-cell">60-100px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🎄</td>
+                        <td class="name-cell">Christmas Tree</td>
+                        <td class="size-cell">70-160px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-forest">Forest</span><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🛶</td>
+                        <td class="name-cell">Canoe</td>
+                        <td class="size-cell">70-120px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-wetland">Wetland</span><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🛖</td>
+                        <td class="name-cell">Beach Hut</td>
+                        <td class="size-cell">70-120px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐄</td>
+                        <td class="name-cell">Cow</td>
+                        <td class="size-cell">70-120px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🚣</td>
+                        <td class="name-cell">Rowboat</td>
+                        <td class="size-cell">80-130px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐎</td>
+                        <td class="name-cell">Horse</td>
+                        <td class="size-cell">80-140px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🎈</td>
+                        <td class="name-cell">Hot Air Balloon</td>
+                        <td class="size-cell">80-150px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐦‍🔥</td>
+                        <td class="name-cell">Phoenix</td>
+                        <td class="size-cell">80-150px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🧌</td>
+                        <td class="name-cell">Yeti</td>
+                        <td class="size-cell">80-140px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐪</td>
+                        <td class="name-cell">Camel</td>
+                        <td class="size-cell">80-140px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🗿</td>
+                        <td class="name-cell">Moai</td>
+                        <td class="size-cell">80-160px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🏚️</td>
+                        <td class="name-cell">Shed</td>
+                        <td class="size-cell">80-130px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🚐</td>
+                        <td class="name-cell">Van</td>
+                        <td class="size-cell">80-130px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🚤</td>
+                        <td class="name-cell">Speedboat</td>
+                        <td class="size-cell">85-140px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">⛵</td>
+                        <td class="name-cell">Sailboat</td>
+                        <td class="size-cell">90-150px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦬</td>
+                        <td class="name-cell">Bison</td>
+                        <td class="size-cell">90-150px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🏕️</td>
+                        <td class="name-cell">Campground</td>
+                        <td class="size-cell">90-150px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦛</td>
+                        <td class="name-cell">Hippopotamus</td>
+                        <td class="size-cell">90-150px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-wetland">Wetland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐻‍❄️</td>
+                        <td class="name-cell">Polar Bear</td>
+                        <td class="size-cell">90-150px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-beach">Beach</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🚜</td>
+                        <td class="name-cell">Tractor</td>
+                        <td class="size-cell">90-150px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">⛲</td>
+                        <td class="name-cell">Fountain</td>
+                        <td class="size-cell">90-150px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🏪</td>
+                        <td class="name-cell">Shop</td>
+                        <td class="size-cell">90-150px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦏</td>
+                        <td class="name-cell">Rhinoceros</td>
+                        <td class="size-cell">90-150px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🏝️</td>
+                        <td class="name-cell">Desert Island</td>
+                        <td class="size-cell">100-180px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦒</td>
+                        <td class="name-cell">Giraffe</td>
+                        <td class="size-cell">100-180px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌪️</td>
+                        <td class="name-cell">Tornado</td>
+                        <td class="size-cell">100-200px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌳</td>
+                        <td class="name-cell">Oak Tree</td>
+                        <td class="size-cell">100-200px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span><span class="biome-tag tag-orchard">Orchard</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🚌</td>
+                        <td class="name-cell">Bus</td>
+                        <td class="size-cell">100-160px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦣</td>
+                        <td class="name-cell">Mammoth</td>
+                        <td class="size-cell">100-160px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌲</td>
+                        <td class="name-cell">Pine Tree</td>
+                        <td class="size-cell">120-220px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🎠</td>
+                        <td class="name-cell">Carousel</td>
+                        <td class="size-cell">120-200px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦖</td>
+                        <td class="name-cell">T-Rex</td>
+                        <td class="size-cell">120-220px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🏠</td>
+                        <td class="name-cell">House</td>
+                        <td class="size-cell">140-280px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-farmland">Farmland</span><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-spring">Sp</span><span class="season-tag tag-summer">Su</span><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🦕</td>
+                        <td class="name-cell">Brontosaurus</td>
+                        <td class="size-cell">150-280px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span><span class="biome-tag tag-forest">Forest</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐉</td>
+                        <td class="name-cell">Dragon</td>
+                        <td class="size-cell">150-280px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🎡</td>
+                        <td class="name-cell">Ferris Wheel</td>
+                        <td class="size-cell">180-280px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🏔️</td>
+                        <td class="name-cell">Snow Mountain</td>
+                        <td class="size-cell">180-280px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐳</td>
+                        <td class="name-cell">Spouting Whale</td>
+                        <td class="size-cell">200-350px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🐋</td>
+                        <td class="name-cell">Whale</td>
+                        <td class="size-cell">200-350px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌈</td>
+                        <td class="name-cell">Rainbow</td>
+                        <td class="size-cell">200-320px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-meadow">Meadow</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🌋</td>
+                        <td class="name-cell">Volcano</td>
+                        <td class="size-cell">200-320px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🗽</td>
+                        <td class="name-cell">Statue of Liberty</td>
+                        <td class="size-cell">250-350px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-village">Village</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🚢</td>
+                        <td class="name-cell">Ship</td>
+                        <td class="size-cell">280-380px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-ocean">Ocean</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-summer">Su</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                    <tr>
+                        <td class="emoji-cell">🏰</td>
+                        <td class="name-cell">Castle</td>
+                        <td class="size-cell">280-380px</td>
+                        <td class="player-size-cell"><span class="player-any">any</span></td>
+                        <td><div class="biome-tags"><span class="biome-tag tag-hills">Hills</span></div></td>
+                        <td><div class="season-tags"><span class="season-tag tag-fall">Fa</span><span class="season-tag tag-winter">Wi</span></div></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="table-legend">
+                <div class="legend-item"><span class="player-min">&ge;N</span> = Appears when player reaches size N</div>
+                <div class="legend-item"><span class="player-max">&le;N</span> = Disappears when player exceeds size N</div>
+                <div class="legend-item"><span class="player-any">any</span> = Always available</div>
+                <div class="legend-item">Objects can be collected when player is &ge;125% of object size</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Seasonal Growth - A rolling adventure through the seasons</p>
+            <p><a href="/">Back to Game</a></p>
+            <p class="generated-note">Documentation auto-generated from game data on 1/15/2026</p>
+        </footer>
+    </div>
+</body>
+</html>
