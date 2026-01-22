@@ -1,15 +1,17 @@
 {
     "name": "seasonalgrowth",
     "private": false,
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "TBD Game Jam game (1&#x2F;14)",
     "type": "module",
     "scripts": {
         "dev": "concurrently \"vite --port 5173 --strictPort\" \"rcade dev http://localhost:5173\"",
-        "build": "npm run generate-docs && vite build",
-        "generate-docs": "node scripts/generate-docs.js"
+        "build": "npm run generate-sprites && npm run generate-docs && vite build",
+        "generate-docs": "node scripts/generate-docs.js",
+        "generate-sprites": "node scripts/generate-sprites.js"
     },
     "devDependencies": {
+        "@napi-rs/canvas": "^0.1.88",
         "concurrently": "^9.0.0",
         "rcade": "^0.0.41",
         "vite": "^7.2.4"

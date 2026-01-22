@@ -3,7 +3,7 @@ import { resolve } from "path";
 
 export default defineConfig({
     publicDir: "public",
-    base: "/rc/dist/",
+    base: "./",
     build: {
         assetsInlineLimit: 0,
         rollupOptions: {

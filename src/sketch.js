@@ -5,7 +5,7 @@ import { GameObject } from "./gameObject.js";
 import { Camera } from "./camera.js";
 import { World, WORLD_WIDTH, WORLD_HEIGHT, WORLD_CENTER_X, WORLD_CENTER_Y, ISLAND_RADIUS_X, ISLAND_RADIUS_Y, BIOMES } from "./world.js";
 import { SeededRandom } from "./noise.js";
-import { createEmojiSprite, DEFAULT_SPRITE_SIZE, LARGE_SPRITE_SIZE } from "./sprites.js";
+import { createEmojiSprite, loadSpriteIndex, DEFAULT_SPRITE_SIZE, LARGE_SPRITE_SIZE } from "./sprites.js";
 import { shouldSpawnForPlayerSize } from "./biomes.js";
 
 // RCade screen dimensions
@@ -816,6 +816,11 @@ const sketch = (p) => {
         }
 
     }
+
+    p.preload = () => {
+        // Load sprite index before setup
+        loadSpriteIndex(p);
+    };
 
     p.setup = () => {
         p.createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
